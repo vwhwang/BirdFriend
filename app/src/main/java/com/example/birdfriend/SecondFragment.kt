@@ -16,6 +16,7 @@ import android.graphics.drawable.AnimationDrawable
 class SecondFragment : Fragment() {
 
     lateinit var flyAnimation: AnimationDrawable
+    lateinit var pizzaAnimation: AnimationDrawable
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +36,16 @@ class SecondFragment : Fragment() {
         view.findViewById<Button>(R.id.postcards_button).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_PostcardsFragment)
         }
+
+        view.findViewById<Button>(R.id.pizza_button).setOnClickListener {
+            val pizzaImage = view.findViewById<ImageView>(R.id.fly).apply {
+                setBackgroundResource(R.drawable.pizza_animation)
+                pizzaAnimation = background as AnimationDrawable
+            }
+            pizzaAnimation.start()
+
+        }
+
 
         val flyImage = view.findViewById<ImageView>(R.id.fly).apply {
             setBackgroundResource(R.drawable.animation)
