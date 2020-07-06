@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import android.graphics.drawable.AnimationDrawable
 
+
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
