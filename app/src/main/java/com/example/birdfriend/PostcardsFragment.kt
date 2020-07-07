@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
+import kotlinx.android.synthetic.main.fragment_postcards.*
 
 /**
  * A simple [Fragment] subclass.
@@ -46,6 +48,26 @@ class PostcardsFragment : Fragment() {
                 imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
                 imgSrc.setImageResource(card.nameid)
                 cardList.addView(imgSrc)
+
+                //click on image to show popup window
+                imgSrc.setOnClickListener(){
+
+                    var window = PopupWindow(activity)
+                    var view = layoutInflater.inflate(R.layout.dialog_pop_up, null)
+                    window.contentView = view
+                    var imageView = view.findViewById<ImageView>(R.id.imageView)
+                    imageView.setImageResource(card.nameid)
+//                    imageView.setOnClickListener{
+//                        window.dismiss()
+//                    }
+                    val dismissButton = view.findViewById<Button>(R.id.dismiss_button)
+                    dismissButton.setOnClickListener{
+                        window.dismiss()
+                    }
+
+                    window.showAsDropDown(textView)
+
+                }
             }
         } else {
             Log.d("help", "context was null")
