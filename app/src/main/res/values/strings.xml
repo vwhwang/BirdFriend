@@ -18,4 +18,5 @@
     <string name="exit">Exit</string>
     <string name="x">x</string>
     <string name="share">Share</string>
+    <string name="temp_notify">temp notify</string>
 </resources>

@@ -64,4 +64,6 @@ dependencies {
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
+    //noinspection GradleCompatible
+    implementation "com.android.support:support-compat:28.0.0"
 }
