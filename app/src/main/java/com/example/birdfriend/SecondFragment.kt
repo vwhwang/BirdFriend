@@ -9,7 +9,8 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import android.graphics.drawable.AnimationDrawable
-
+import android.widget.TextView
+import com.example.birdfriend.HomeAwayWorker
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -55,6 +56,12 @@ class SecondFragment : Fragment() {
 //        flyAnimation.start()
         flyImage.setOnClickListener({ flyAnimation.start() })
 
+
+
+        //tyring to check for backenddisplay
+//        view.findViewById<TextView>(R.id.textview_second).apply {
+//            var testing = HomeAwayWorker().TEXTING_TEXT
+//        }
 
     }
 }

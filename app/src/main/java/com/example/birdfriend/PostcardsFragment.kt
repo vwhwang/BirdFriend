@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment_postcards.*
 
 /**
@@ -40,10 +39,28 @@ class PostcardsFragment : Fragment() {
         val context = activity?.applicationContext
         if (context != null) {
             val db = UserCardsRoomDatabase.getDatabase(context)
-            val userCardList = db.userCardsDao().getAlluserCards()
 
+
+            //add new data
+//            db.userCardsDao().insertCards(UserCards(3,R.drawable.post_4,true))
+            Log.d("check", R.drawable.post_4.toString())
+
+            //check if resId is different than R.drawable.name etc.
+
+            var resourceID = resources.getIdentifier(
+                "post_4",
+                "drawable",
+                "com.example.birdfriend"
+            )
+
+            Log.d("check", resourceID.toString())
+            //
+
+            val userCardList = db.userCardsDao().getAlluserCards()
             for (card in userCardList) {
-                Log.d("help", card.toString())
+
+                Log.d("help", card.nameid.toString())
+
                 val imgSrc = ImageView(getActivity())
                 imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
                 imgSrc.setImageResource(card.nameid)
