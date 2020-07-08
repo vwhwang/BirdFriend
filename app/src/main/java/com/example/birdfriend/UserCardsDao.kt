@@ -9,7 +9,7 @@ interface UserCardsDao {
 //    @Query("SELECT * from user_cards_table WHERE card_status = True")
 //    fun getShowCards(): List<UserCards>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertCards(card: UserCards)
 
     @Query("DELETE FROM user_cards_table")
