@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
@@ -58,6 +59,14 @@ class MainActivity : AppCompatActivity() {
         workManager.getWorkInfoByIdLiveData(backendLoad.id)
             .observe(this, Observer {
                 textview_second.text = it.state.name
+                if(it.state.isFinished){
+                    val data = it.outputData
+                    // TOAST MESSAGE for deciding home or not home
+                    val message1 = data.getString(HomeAwayWorker.KEY_WORKER)
+                    Toast.makeText(applicationContext,message1,Toast.LENGTH_LONG).show()
+                    val messageStatus = data.getString(HomeAwayWorker.KEY_STATUS)
+                    Toast.makeText(applicationContext,messageStatus,Toast.LENGTH_LONG).show()
+                }
             })
 
     }
