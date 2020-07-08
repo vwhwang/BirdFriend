@@ -8,6 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.WorkManager
+import androidx.work.OneTimeWorkRequest
+import com.example.birdfriend.HomeAwayWorker
+import kotlinx.android.synthetic.main.fragment_second.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,10 +20,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+//        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
+
+
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            setOneTimeWorkRequet()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -36,5 +46,19 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    //
+    private fun setOneTimeWorkRequet(){
+        val workManager =  WorkManager.getInstance(applicationContext)
+
+        val backendLoad =  OneTimeWorkRequest.Builder(HomeAwayWorker::class.java)
+            .build()
+        workManager.enqueue(backendLoad)
+        workManager.getWorkInfoByIdLiveData(backendLoad.id)
+            .observe(this, Observer {
+                textview_second.text = it.state.name
+            })
+
     }
 }

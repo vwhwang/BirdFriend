@@ -19,4 +19,5 @@
     <string name="x">x</string>
     <string name="share">Share</string>
     <string name="temp_notify">temp notify</string>
+    <string name="backend">BACKEND</string>
 </resources>

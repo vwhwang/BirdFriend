@@ -1,16 +1,14 @@
 package com.example.birdfriend
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import android.graphics.drawable.AnimationDrawable
-import android.widget.TextView
-import com.example.birdfriend.HomeAwayWorker
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -59,9 +57,11 @@ class SecondFragment : Fragment() {
 
 
         //tyring to check for backenddisplay
-//        view.findViewById<TextView>(R.id.textview_second).apply {
-//            var testing = HomeAwayWorker().TEXTING_TEXT
+//        view.findViewById<Button>(R.id.textview_second).setOnClickListener {
+//            setOneTimeWorkRequet()
 //        }
 
     }
+
+
 }
