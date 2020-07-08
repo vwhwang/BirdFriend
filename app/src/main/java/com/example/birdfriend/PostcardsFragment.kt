@@ -45,7 +45,7 @@ class PostcardsFragment : Fragment() {
 //            db.userCardsDao().deleteAll()
 
             //current db has post 1 already
-//            db.userCardsDao().insertCards(UserCards(1,"post_1",true))
+//            db.userCardsDao().insertCards(UserCards("post_2",true))
 
             val userCardList = db.userCardsDao().getAlluserCards()
 
