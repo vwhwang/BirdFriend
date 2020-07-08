@@ -34,49 +34,51 @@ class PostcardsFragment : Fragment() {
             findNavController().navigate(R.id.action_PostcardsFragment_to_SecondFragment)
         }
         val cardList = view.findViewById<LinearLayout>(R.id.cards_display)
+
 // Build data
 
         val context = activity?.applicationContext
+
         if (context != null) {
             val db = UserCardsRoomDatabase.getDatabase(context)
 
+//            db.userCardsDao().deleteAll()
 
-            //add new data
-//            db.userCardsDao().insertCards(UserCards(3,R.drawable.post_4,true))
-            Log.d("check", R.drawable.post_4.toString())
-
-            //check if resId is different than R.drawable.name etc.
-
-            var resourceID = resources.getIdentifier(
-                "post_4",
-                "drawable",
-                "com.example.birdfriend"
-            )
-
-            Log.d("check", resourceID.toString())
-            //
+            //current db has post 1 already
+//            db.userCardsDao().insertCards(UserCards(1,"post_1",true))
 
             val userCardList = db.userCardsDao().getAlluserCards()
-            for (card in userCardList) {
 
-                Log.d("help", card.nameid.toString())
+            for (card in userCardList) {
 
                 val imgSrc = ImageView(getActivity())
                 imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
-                imgSrc.setImageResource(card.nameid)
+
+                //setting up imagename to resourceID
+
+                var resourceID = resources.getIdentifier(
+                    card.imgname,
+                    "drawable",
+                    "com.example.birdfriend"
+                )
+
+                imgSrc.setImageResource(resourceID)
                 cardList.addView(imgSrc)
 
                 //click on image to show popup window
+
                 imgSrc.setOnClickListener(){
 
                     var window = PopupWindow(activity)
                     var view = layoutInflater.inflate(R.layout.dialog_pop_up, null)
                     window.contentView = view
                     var imageView = view.findViewById<ImageView>(R.id.imageView)
-                    imageView.setImageResource(card.nameid)
+                    imageView.setImageResource(resourceID)
+
 //                    imageView.setOnClickListener{
 //                        window.dismiss()
 //                    }
+
                     val dismissButton = view.findViewById<Button>(R.id.dismiss_button)
                     dismissButton.setOnClickListener{
                         window.dismiss()
@@ -89,18 +91,6 @@ class PostcardsFragment : Fragment() {
         } else {
             Log.d("help", "context was null")
         }
-
-//
-//        var c1 = Cards( R.drawable.post_1)
-//        var c2 = Cards(R.drawable.post_2)
-//        val testList =  arrayListOf<Cards>(c1,c2)
-//        Log.d("cards", c1.toString())
-//        for (card in testList){
-//            var imgSrc =  ImageView(getActivity())
-//            imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
-//            imgSrc.setImageResource(card.name)
-//            cardList.addView(imgSrc)
-//        }
 
 
     }
