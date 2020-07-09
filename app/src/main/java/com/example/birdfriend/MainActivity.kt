@@ -73,10 +73,10 @@ class MainActivity : AppCompatActivity() {
                     mainHomeStatus = data.getString(HomeAwayWorker.KEY_STATUS).toString()
                     //try assign here doesn't work only disappear for a second
 
-//                    if (mainHomeStatus == "Away"){
-//                        var bird = findViewById<ImageView>(R.id.fly)
-//                        bird.isVisible = false
-//                    }
+                    if (mainHomeStatus == "Away"){
+                        var bird = findViewById<ImageView>(R.id.fly)
+                        bird.isVisible = false
+                    }
 
                     // TOAST MESSAGE to show home or away
                     val message1 = data.getString(HomeAwayWorker.KEY_WORKER)

@@ -10,6 +10,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import android.util.Log
+import androidx.core.view.isVisible
+
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
@@ -49,6 +51,7 @@ class SecondFragment : Fragment() {
 // try hide flyimage if away status
         Log.d("check", MainActivity.mainHomeStatus.toString())
 
+
         val flyImage = view.findViewById<ImageView>(R.id.fly).apply {
             setBackgroundResource(R.drawable.animation)
             flyAnimation = background as AnimationDrawable
@@ -56,13 +59,10 @@ class SecondFragment : Fragment() {
 //        flyAnimation.start()
             flyImage.setOnClickListener({ flyAnimation.start() })
 
+        if (MainActivity.mainHomeStatus == "Away") {
+            flyImage.isVisible = false
+        }
 
-
-
-        //tyring to check for backenddisplay
-//        view.findViewById<Button>(R.id.textview_second).setOnClickListener {
-//            setOneTimeWorkRequet()
-//        }
 
     }
 
