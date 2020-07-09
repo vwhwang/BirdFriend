@@ -1,5 +1,6 @@
 package com.example.birdfriend
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,6 +17,8 @@ import androidx.work.WorkManager
 import androidx.work.OneTimeWorkRequest
 import com.example.birdfriend.HomeAwayWorker
 import kotlinx.android.synthetic.main.fragment_second.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +45,16 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             setOneTimeWorkRequet()
             Log.d("main", mainHomeStatus.toString())
+
+            // below show how to log data to log_state_table
+
+            val db = LogStateDatabase.getDatabase(applicationContext)
+            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val currentDate = time.format(Date())
+            // add data
+//            db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = "Home"))
+            Log.d("log_data", db.logStateDao().getLastState()[0].creationDate.toString())
+
         }
 
     }
