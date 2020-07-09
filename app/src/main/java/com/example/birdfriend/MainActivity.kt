@@ -36,15 +36,15 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         //set up my preference
-
+/**
         val mypreference = MyPreference(context = this)
         mypreference.setHomeAway(mainHomeStatus.toString())
         mainHomeStatus = mypreference.getHomeAway().toString()
-
+*/
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             setOneTimeWorkRequet()
-            Log.d("main", mainHomeStatus.toString())
+//            Log.d("main", mainHomeStatus.toString())
 
             // below show how to log data to log_state_table
 
@@ -89,16 +89,19 @@ class MainActivity : AppCompatActivity() {
                     val data = it.outputData
 
 
-                    // doesn't work if restart
+                    // LOG HOME STATUS BASED ON LOG STATE DB
+                    val db = LogStateDatabase.getDatabase(applicationContext)
+                    val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                    val currentDate = time.format(Date())
+                    val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
+                    db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
 
-                    mainHomeStatus = data.getString(HomeAwayWorker.KEY_STATUS).toString()
 
                     /**
                     val mypreference = MyPreference(context = this)
                     mypreference.setHomeAway(data.getString(HomeAwayWorker.KEY_STATUS).toString())
                     mainHomeStatus = mypreference.getHomeAway().toString()
                      */
-
 
                     // TOAST MESSAGE to show home or away
                     val message1 = data.getString(HomeAwayWorker.KEY_WORKER)

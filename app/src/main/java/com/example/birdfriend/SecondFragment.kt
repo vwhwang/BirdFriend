@@ -50,7 +50,7 @@ class SecondFragment : Fragment() {
         }
 
 // try hide flyimage if away status
-        Log.d("check", MainActivity.mainHomeStatus.toString())
+//        Log.d("check", MainActivity.mainHomeStatus.toString())
 
 
         val flyImage = view.findViewById<ImageView>(R.id.fly).apply {
@@ -61,11 +61,14 @@ class SecondFragment : Fragment() {
             flyImage.setOnClickListener({ flyAnimation.start() })
 
 
-
-        if (MainActivity.mainHomeStatus == "Away") {
-            flyImage.isVisible = false
+// HOME OR NOT CALL FROM LOG STATE
+        val context = activity?.applicationContext
+        if (context != null) {
+            val dbLogState = LogStateDatabase.getDatabase(context)
+            if (dbLogState.logStateDao().getLastState()[0].stateHomeAway == "Away"){
+                flyImage.isVisible = false
+            }
         }
-
 
     }
 
