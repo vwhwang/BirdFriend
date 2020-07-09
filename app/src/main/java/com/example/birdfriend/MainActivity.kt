@@ -1,12 +1,15 @@
 package com.example.birdfriend
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
@@ -16,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_second.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        var mainHomeStatus = "TBD"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             setOneTimeWorkRequet()
+            Log.d("main", mainHomeStatus.toString())
         }
 
     }
@@ -61,7 +68,17 @@ class MainActivity : AppCompatActivity() {
                 textview_second.text = it.state.name
                 if(it.state.isFinished){
                     val data = it.outputData
-                    // TOAST MESSAGE for deciding home or not home
+
+
+                    mainHomeStatus = data.getString(HomeAwayWorker.KEY_STATUS).toString()
+                    //try assign here doesn't work only disappear for a second
+
+//                    if (mainHomeStatus == "Away"){
+//                        var bird = findViewById<ImageView>(R.id.fly)
+//                        bird.isVisible = false
+//                    }
+
+                    // TOAST MESSAGE to show home or away
                     val message1 = data.getString(HomeAwayWorker.KEY_WORKER)
                     Toast.makeText(applicationContext,message1,Toast.LENGTH_LONG).show()
                     val messageStatus = data.getString(HomeAwayWorker.KEY_STATUS)

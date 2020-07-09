@@ -21,7 +21,7 @@ class HomeAwayWorker(appContext: Context, workerParams: WorkerParameters):
         // Do the work here--in this case, change show text display
         try {
 
-            for (i in 1..6000) {
+            for (i in 1..2) {
                 Log.i("testing", "this is working $i")
             }
 
