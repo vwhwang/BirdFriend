@@ -32,6 +32,12 @@ class MainActivity : AppCompatActivity() {
 //                    .setAction("Action", null).show()
 //        }
 
+        //set up my preference
+
+        val mypreference = MyPreference(context = this)
+        mypreference.setHomeAway(mainHomeStatus.toString())
+        mainHomeStatus = mypreference.getHomeAway().toString()
+
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             setOneTimeWorkRequet()
@@ -70,13 +76,16 @@ class MainActivity : AppCompatActivity() {
                     val data = it.outputData
 
 
-                    mainHomeStatus = data.getString(HomeAwayWorker.KEY_STATUS).toString()
-                    //try assign here doesn't work only disappear for a second
+                    // doesn't work if restart
 
-                    if (mainHomeStatus == "Away"){
-                        var bird = findViewById<ImageView>(R.id.fly)
-                        bird.isVisible = false
-                    }
+                    mainHomeStatus = data.getString(HomeAwayWorker.KEY_STATUS).toString()
+
+                    /**
+                    val mypreference = MyPreference(context = this)
+                    mypreference.setHomeAway(data.getString(HomeAwayWorker.KEY_STATUS).toString())
+                    mainHomeStatus = mypreference.getHomeAway().toString()
+                     */
+
 
                     // TOAST MESSAGE to show home or away
                     val message1 = data.getString(HomeAwayWorker.KEY_WORKER)

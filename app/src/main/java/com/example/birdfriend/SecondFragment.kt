@@ -2,15 +2,16 @@ package com.example.birdfriend
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import android.util.Log
-import androidx.core.view.isVisible
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -58,6 +59,8 @@ class SecondFragment : Fragment() {
         }
 //        flyAnimation.start()
             flyImage.setOnClickListener({ flyAnimation.start() })
+
+
 
         if (MainActivity.mainHomeStatus == "Away") {
             flyImage.isVisible = false
