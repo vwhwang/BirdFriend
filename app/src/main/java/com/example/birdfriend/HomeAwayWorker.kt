@@ -19,6 +19,8 @@ class HomeAwayWorker(appContext: Context, workerParams: WorkerParameters):
     override fun doWork(): Result {
 
         // Do the work here--in this case, change show text display
+
+
         try {
 
             Log.i("testing", "worker initiated!")

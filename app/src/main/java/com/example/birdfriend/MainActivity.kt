@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+
+        // OnCreate will fire home or away
+        setOneTimeWorkRequet()
+        Log.i("MainActivity", "setOneTimeWorkRequet was called")
+
 //ORIGINAL
 //        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -42,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
-            setOneTimeWorkRequet()
-
+//            setOneTimeWorkRequet()
+            Log.i("MainActivity", "setOneTimeWorkRequet was called")
 
             // below show how to log data to log_state_table
 
@@ -86,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         workManager.enqueue(backendLoad)
         workManager.getWorkInfoByIdLiveData(backendLoad.id)
             .observe(this, Observer {
-                textview_second.text = it.state.name
+//                textview_second.text = it.state.name
                 Log.d("log_data",it.state.name)
 
                 if(it.state.isFinished){
