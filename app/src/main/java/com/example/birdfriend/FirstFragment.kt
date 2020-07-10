@@ -99,3 +99,30 @@ class FirstFragment : Fragment() {
     }
 }
 
+
+
+// below works
+/*
+
+
+        view.findViewById<Button>(R.id.temp_notify_button).setOnClickListener{
+
+            notificationManager = this.activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            val intent = Intent(activity, LauncherActivityInfo::class.java)
+            val pendingIntent = PendingIntent.getActivity(activity,0,intent, 0)
+            notificationChannel = NotificationChannel(channelId, description,NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableLights(true)
+            notificationChannel.enableVibration(false)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+            builder = Notification.Builder(activity, channelId)
+                .setContentTitle("Bird Notification:")
+                .setContentText("You got mail from your BirdFriend!")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.bird_1)
+
+            notificationManager.notify(0, builder.build())
+        }
+ */

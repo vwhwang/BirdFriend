@@ -1,6 +1,13 @@
 package com.example.birdfriend
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.content.pm.LauncherActivityInfo
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -10,6 +17,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,15 +30,31 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+//TRYING TO ADD NOTIFICATION HERE
+lateinit var notificationManager: NotificationManager
+lateinit var notificationChannel: NotificationChannel
+lateinit var builder: Notification.Builder
+private  val channelId = "com.example.birdfriend"
+private  val description = "BirdFriend Notification"
+
 class MainActivity : AppCompatActivity() {
 
     companion object{
         var mainHomeStatus = "TBD"
+        var sendNewCard = true
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+//SET UP NOTIFICATION HERE IT WORKS!!!
+
+//        if (sendNewCard == true) {
+//            sendNewNotification()
+//        }
 
 
         // OnCreate will fire home or away
@@ -63,6 +87,44 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun sendNewNotification() {
+        notificationManager =
+            this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val intent = Intent(this, LauncherActivityInfo::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel =
+            NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel.enableLights(true)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel.enableVibration(false)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder = Notification.Builder(this, channelId)
+            .setContentTitle("Bird Notification:")
+            .setContentText("You got mail from your BirdFriend!")
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setSmallIcon(R.drawable.bird_1)
+        }
+
+        notificationManager.notify(0, builder.build())
+        sendNewCard = false
+    }
+
+
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -79,15 +141,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //
+
+
 
 
     //SET ONE TIME (THIS WORKS GREAT)
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun setOneTimeWorkRequet(){
         val workManager =  WorkManager.getInstance(applicationContext)
 
         val backendLoad =  OneTimeWorkRequest.Builder(HomeAwayWorker::class.java)
-            .setInitialDelay(1, TimeUnit.MINUTES)
+            .setInitialDelay(3, TimeUnit.MINUTES)
             .build()
         workManager.enqueue(backendLoad)
         workManager.getWorkInfoByIdLiveData(backendLoad.id)
@@ -103,7 +167,7 @@ class MainActivity : AppCompatActivity() {
                     val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
                     db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
 
-
+                    Log.d("log_data","THIS IS WITHIN WORK REQUEST")
                     Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
                     Log.d("log_data",db.logStateDao().getLastState()[0].creationDate.toString())
                     Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
