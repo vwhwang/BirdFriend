@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity() {
         val workManager =  WorkManager.getInstance(applicationContext)
 
         val backendLoad =  OneTimeWorkRequest.Builder(HomeAwayWorker::class.java)
-//            .setInitialDelay(1, TimeUnit.MINUTES)
+            .setInitialDelay(1, TimeUnit.MINUTES)
             .build()
         workManager.enqueue(backendLoad)
         workManager.beginUniqueWork("Unique", ExistingWorkPolicy.KEEP , OneTimeWorkRequest.from(HomeAwayWorker::class.java))
