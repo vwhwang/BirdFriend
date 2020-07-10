@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import androidx.work.OneTimeWorkRequest
 import androidx.work.PeriodicWorkRequest
@@ -58,8 +59,13 @@ class MainActivity : AppCompatActivity() {
 
         //HERE WILL LOG DATA EVERYTIME APP ON CREATE//
         // OnCreate will fire home or away
-        setOneTimeWorkRequet()
-        Log.i("MainActivity", "setOneTimeWorkRequet was called")
+//        setOneTimeWorkRequet()
+//        Log.i("MainActivity", "setOneTimeWorkRequet was called")
+
+
+//        setOneTimeWorkRequet2()
+//        Log.i("MainActivity", "setOneTimeWorkRequet2 was called")
+
 
 
 //ORIGINAL
@@ -69,12 +75,11 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
-//            setOneTimeWorkRequet()
-            Log.i("MainActivity", "setOneTimeWorkRequet was called")
+            setOneTimeWorkRequet2()
+            Log.i("MainActivity", "setOneTimeWorkRequet2 was called")
 
             // below show how to log data to log_state_table
 
@@ -147,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
 
     //SET ONE TIME (THIS WORKS GREAT)
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+//    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun setOneTimeWorkRequet(){
         val workManager =  WorkManager.getInstance(applicationContext)
 
@@ -177,9 +182,42 @@ class MainActivity : AppCompatActivity() {
             })
 
     }
+
+
+    //attemp2 THIS ONE CALL DATA AT SOURCE
+
+    private fun setOneTimeWorkRequet2(){
+        val workManager =  WorkManager.getInstance(applicationContext)
+
+        val backendLoad =  OneTimeWorkRequest.Builder(HomeAwayWorker::class.java)
+//            .setInitialDelay(1, TimeUnit.MINUTES)
+            .build()
+        workManager.enqueue(backendLoad)
+        workManager.beginUniqueWork("Unique", ExistingWorkPolicy.KEEP , OneTimeWorkRequest.from(HomeAwayWorker::class.java))
+        workManager.getWorkInfoByIdLiveData(backendLoad.id)
+            .observe(this, Observer {
+//                textview_second.text = it.state.name
+                Log.d("log_data",it.state.name)
+
+                if(it.state.isFinished){
+                    val data = it.outputData
+                    val db = LogStateDatabase.getDatabase(applicationContext)
+                    val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                    val currentDate = time.format(Date())
+                    val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
+//                    db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
+
+                    Log.d("log_data","THIS IS WITHIN WORK REQUEST")
+                    Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
+                    Log.d("log_data",db.logStateDao().getLastState()[0].creationDate.toString())
+                    Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
+
+                }
+            })
+
+    }
+
 }
-
-
 
 
 

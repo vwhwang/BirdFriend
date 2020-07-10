@@ -22,22 +22,27 @@ class HomeAwayWorker(appContext: Context, workerParams: WorkerParameters):
 
 
         try {
-
+//match attemp2 where it calls data here
+            setHomeAwayStatus()
+            return Result.success()
             Log.i("testing", "worker initiated!")
+            // below is where data is log at request method
 
-            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-            val currentDate = time.format(Date())
+//
+//            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+//            val currentDate = time.format(Date())
+//
+//            val option = arrayOf("Home", "Away")
+//            val roll =  option[(0..1).random()]
+//
+//
+//            val outPutData = Data.Builder()
+//                .putString(KEY_WORKER, currentDate )
+//                .putString(KEY_STATUS,roll)
+//                .build()
+//
+//            return Result.success(outPutData)
 
-            val option = arrayOf("Home", "Away")
-            val roll =  option[(0..1).random()]
-
-
-            val outPutData = Data.Builder()
-                .putString(KEY_WORKER, currentDate )
-                .putString(KEY_STATUS,roll)
-                .build()
-
-            return Result.success(outPutData)
         } catch(e:Exception) {
                 return Result.failure()
             }
