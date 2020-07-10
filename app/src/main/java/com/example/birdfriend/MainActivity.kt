@@ -56,10 +56,11 @@ class MainActivity : AppCompatActivity() {
 //            sendNewNotification()
 //        }
 
-
+        //HERE WILL LOG DATA EVERYTIME APP ON CREATE//
         // OnCreate will fire home or away
         setOneTimeWorkRequet()
         Log.i("MainActivity", "setOneTimeWorkRequet was called")
+
 
 //ORIGINAL
 //        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
@@ -151,7 +152,7 @@ class MainActivity : AppCompatActivity() {
         val workManager =  WorkManager.getInstance(applicationContext)
 
         val backendLoad =  OneTimeWorkRequest.Builder(HomeAwayWorker::class.java)
-            .setInitialDelay(3, TimeUnit.MINUTES)
+//            .setInitialDelay(3, TimeUnit.MINUTES)
             .build()
         workManager.enqueue(backendLoad)
         workManager.getWorkInfoByIdLiveData(backendLoad.id)
