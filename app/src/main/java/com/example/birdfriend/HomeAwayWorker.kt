@@ -21,26 +21,72 @@ class HomeAwayWorker(appContext: Context, workerParams: WorkerParameters):
         // Do the work here--in this case, change show text display
         try {
 
-            for (i in 1..2) {
-                Log.i("testing", "this is working $i")
-            }
+            Log.i("testing", "worker initiated!")
 
-            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-            val currentDate = time.format(Date())
+            //USING OUTSIDE METHOD
+            setHomeAwayStatus()
 
-            val option = arrayOf("Home", "Away")
-            val roll =  option[(0..1).random()]
-
-
-            val outPutData = Data.Builder()
-                .putString(KEY_WORKER, currentDate )
-                .putString(KEY_STATUS,roll)
-                .build()
-
-            return Result.success(outPutData)
+            return Result.success()
         } catch(e:Exception) {
                 return Result.failure()
             }
         }
 
+    //set up func
+    private  fun setHomeAwayStatus(){
+
+        Log.i("testing", "worker initiated!")
+
+        val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = time.format(Date())
+
+        val option = arrayOf("Home", "Away")
+        val roll =  option[(0..1).random()]
+
+        val db = LogStateDatabase.getDatabase(applicationContext)
+        db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = roll))
+        }
+
     }
+
+
+
+//OUTSIDE DATA EXAMPLE
+/**
+try {
+
+Log.i("testing", "worker initiated!")
+
+val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+val currentDate = time.format(Date())
+
+val option = arrayOf("Home", "Away")
+val roll =  option[(0..1).random()]
+
+
+val outPutData = Data.Builder()
+.putString(KEY_WORKER, currentDate )
+.putString(KEY_STATUS,roll)
+.build()
+
+//TESTING2
+val db = LogStateDatabase.getDatabase(applicationContext)
+val newState = outPutData.getString(HomeAwayWorker.KEY_STATUS).toString()
+val dateInsert = outPutData.getString(HomeAwayWorker.KEY_WORKER).toString()
+db.logStateDao().insertState(LogState(creationDate = dateInsert, stateHomeAway = newState))
+
+
+//TESTING
+/*
+val db = LogStateDatabase.getDatabase(applicationContext)
+//            val newState = outPutData.getString(HomeAwayWorker.KEY_STATUS).toString()
+db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = roll))
+*/
+
+return Result.success(outPutData)
+} catch(e:Exception) {
+return Result.failure()
+}
+}
+
+        */

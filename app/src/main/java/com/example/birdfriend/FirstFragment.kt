@@ -42,8 +42,34 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.door_button).setOnClickListener {
-            Log.d("notify", "this for sure works")
+//            Log.d("notify", "this for sure works")
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        // add Log button to show database
+        val context = activity?.applicationContext
+
+        view.findViewById<Button>(R.id.show_log_button).setOnClickListener{
+            if (context != null) {
+                val db = LogStateDatabase.getDatabase(context)
+                val allLog = db.logStateDao().getlogState()
+
+                val dbUser = UserCardsRoomDatabase.getDatabase(context)
+                val allUserCards = dbUser.userCardsDao().getAlluserCards()
+
+                for (log in allLog){
+                    Log.d("log_but",log.uid.toString())
+                    Log.d("log_but",log.creationDate.toString())
+                    Log.d("log_but",log.stateHomeAway.toString())
+                }
+
+                for (card in allUserCards){
+                    Log.d("log_but",card.imgname.toString())
+                    Log.d("log_but",card.cardstatus.toString())
+                }
+
+
+            }
         }
 
         // add notification to button
