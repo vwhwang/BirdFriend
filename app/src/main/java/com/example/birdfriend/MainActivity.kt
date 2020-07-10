@@ -31,27 +31,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-
+//ORIGINAL
 //        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
 //        }
 
-        //set up my preference
-/**
-        val mypreference = MyPreference(context = this)
-        mypreference.setHomeAway(mainHomeStatus.toString())
-        mainHomeStatus = mypreference.getHomeAway().toString()
-*/
+
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
-//            setOneTimeWorkRequet()
-
-            // below try Periodic Work request function currently works but log multiplie times
-//            setPerioticStateRequest()
-
+            setOneTimeWorkRequet()
 
 
             // below show how to log data to log_state_table
@@ -59,8 +50,7 @@ class MainActivity : AppCompatActivity() {
             val db = LogStateDatabase.getDatabase(applicationContext)
             val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
             val currentDate = time.format(Date())
-            // add data
-//            db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = "Home"))
+            //Logging last record
             Log.d("log_data", db.logStateDao().getLastState()[0].creationDate.toString())
 
         }
@@ -84,43 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //
-    private fun setPerioticStateRequest(){
-        val workManager =  WorkManager.getInstance(applicationContext)
 
-        val backendLoad =  PeriodicWorkRequest.Builder(
-            HomeAwayWorker::class.java, 15, TimeUnit.MINUTES)
-            .build()
-
-        workManager.enqueue(backendLoad)
-        workManager.getWorkInfoByIdLiveData(backendLoad.id)
-            .observe(this, Observer {
-
-
-                //added attemp
-
-                if (it != null){
-                    val data = it.outputData
-                    val db = LogStateDatabase.getDatabase(applicationContext)
-                    val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-                    val currentDate = time.format(Date())
-                    val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
-                    db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
-
-                }
-                textview_second.text = it.state.name
-
-                Log.d("log_data",it.state.name)
-                Log.d("log_data",it.state.isFinished.toString())
-
-// LOG HOME STATUS BASED ON LOG STATE DB
-                val db = LogStateDatabase.getDatabase(applicationContext)
-                Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
-                Log.d("log_data",db.logStateDao().getLastState()[0].creationDate.toString())
-                Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
-
-            })
-
-    }
 
     //SET ONE TIME (THIS WORKS GREAT)
     private fun setOneTimeWorkRequet(){
@@ -132,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         workManager.enqueue(backendLoad)
         workManager.getWorkInfoByIdLiveData(backendLoad.id)
             .observe(this, Observer {
-//                textview_second.text = it.state.name
+                textview_second.text = it.state.name
                 Log.d("log_data",it.state.name)
 
                 if(it.state.isFinished){
@@ -144,8 +98,6 @@ class MainActivity : AppCompatActivity() {
                     db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
 
 
-
-//                    val db = LogStateDatabase.getDatabase(applicationContext)
                     Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
                     Log.d("log_data",db.logStateDao().getLastState()[0].creationDate.toString())
                     Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
@@ -162,7 +114,22 @@ class MainActivity : AppCompatActivity() {
 
 
 
-// PEREODIC WORK EXAMPLE
+
+
+
+
+
+
+
+
+
+
+
+
+//NOTES//
+
+
+// PEREODIC WORK EXAMPLE I
 
 /**
 private fun setPerioticStateRequest(){
@@ -197,7 +164,7 @@ Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
 
 
 
-// ONE TIME WORK EXAMPLE
+// ONE TIME WORK EXAMPLE II
 /**
 private fun setOneTimeWorkRequet(){
 val workManager =  WorkManager.getInstance(applicationContext)
@@ -237,44 +204,45 @@ Toast.makeText(applicationContext,messageStatus,Toast.LENGTH_LONG).show()
 }
         */
 
-// LOG PEREODIC HERE VERSION II
 
-/**
+
+
+/** THIS IS PERIOTIC EXAMPLE
 private fun setPerioticStateRequest(){
-val workManager =  WorkManager.getInstance(applicationContext)
+    val workManager =  WorkManager.getInstance(applicationContext)
 
-val backendLoad =  PeriodicWorkRequest.Builder(
-HomeAwayWorker::class.java, 16, TimeUnit.MINUTES)
-.build()
+    val backendLoad =  PeriodicWorkRequest.Builder(
+        HomeAwayWorker::class.java, 15, TimeUnit.MINUTES)
+        .build()
 
-workManager.enqueue(backendLoad)
-workManager.getWorkInfoByIdLiveData(backendLoad.id)
-.observe(this, Observer {
-textview_second.text = it.state.name
+    workManager.enqueue(backendLoad)
+    workManager.getWorkInfoByIdLiveData(backendLoad.id)
+        .observe(this, Observer {
 
-Log.d("log_data",it.state.name)
-Log.d("log_data",it.state.isFinished.toString())
-//                val data = it.outputData
-val data = it.outputData
 
+            //added attemp
+
+            if (it != null){
+                val data = it.outputData
+                val db = LogStateDatabase.getDatabase(applicationContext)
+                val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                val currentDate = time.format(Date())
+                val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
+                db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
+
+            }
+            textview_second.text = it.state.name
+
+            Log.d("log_data",it.state.name)
+            Log.d("log_data",it.state.isFinished.toString())
 
 // LOG HOME STATUS BASED ON LOG STATE DB
-val db = LogStateDatabase.getDatabase(applicationContext)
-val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-val currentDate = time.format(Date())
+            val db = LogStateDatabase.getDatabase(applicationContext)
+            Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
+            Log.d("log_data",db.logStateDao().getLastState()[0].creationDate.toString())
+            Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
 
-//                val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
-//pass home away method here
-val option = arrayOf("Home", "Away")
-val roll =  option[(0..1).random()]
-db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = roll))
-
-// LOG HOME STATUS BASED ON LOG STATE DB
-Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
-Log.d("log_data",db.logStateDao().getLastState()[0].creationDate.toString())
-Log.d("log_data",db.logStateDao().getLastState()[0].stateHomeAway.toString())
-
-})
+        })
 
 }
- */
+        */
