@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
-            setOneTimeWorkRequet()
+//            setOneTimeWorkRequet()
 
             // below try Periodic Work request function currently works but log multiplie times
 //            setPerioticStateRequest()
