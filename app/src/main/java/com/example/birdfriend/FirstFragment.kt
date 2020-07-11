@@ -77,31 +77,7 @@ class FirstFragment : Fragment() {
             }
         }
 
-        // Cards Data
-/**
-        if (context != null){
-            val db = UserCardsRoomDatabase.getDatabase(context)
-            val userCardList = db.userCardsDao().getAlluserCards()
-
-//            for (card in userCardList) {
-//
-//                val imgSrc = ImageView(getActivity())
-//                imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
-//
-//                //setting up imagename to resourceID
-//
-//                var resourceID = resources.getIdentifier(
-//                    card.imgname,
-//                    "drawable",
-//                    "com.example.birdfriend"
-//                )}
-//
-//            imgSrc.setImageResource(resourceID)
-//            cardList.addView(imgSrc)
-        }
-        */
-
-        // add notification to button
+        // MAIL BOX POP UP
 
         view.findViewById<Button>(R.id.temp_notify_button).setOnClickListener{
             var cardMail = view.findViewById<LinearLayout>(R.id.mail_pop_up)
@@ -165,7 +141,7 @@ imageView.setBackgroundResource(R.drawable.fly_p3)
 val addButton = view.findViewById<Button>(R.id.add_post_button)
 
 addButton.setOnClickListener{
-//TODO add fun to change db card status to true
+
 setAddCardStatus()
 }
 val dismissButton = view.findViewById<Button>(R.id.mail_pop_up_dismiss)
@@ -185,7 +161,7 @@ window.showAsDropDown(textview_first)
 
 
 
-// below works
+// NOTIFICATION WITHIN CLICK
 /*
 
 
