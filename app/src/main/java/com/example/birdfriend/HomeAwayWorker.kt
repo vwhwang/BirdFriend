@@ -45,6 +45,7 @@ class HomeAwayWorker(appContext: Context, workerParams: WorkerParameters):
 
         } catch(e:Exception) {
                 return Result.failure()
+                Log.i("testing", "worker failed!")
             }
         }
 
