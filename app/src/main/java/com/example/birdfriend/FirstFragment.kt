@@ -14,9 +14,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.android.synthetic.main.fragment_postcards.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -72,32 +77,111 @@ class FirstFragment : Fragment() {
             }
         }
 
+        // Cards Data
+/**
+        if (context != null){
+            val db = UserCardsRoomDatabase.getDatabase(context)
+            val userCardList = db.userCardsDao().getAlluserCards()
+
+//            for (card in userCardList) {
+//
+//                val imgSrc = ImageView(getActivity())
+//                imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
+//
+//                //setting up imagename to resourceID
+//
+//                var resourceID = resources.getIdentifier(
+//                    card.imgname,
+//                    "drawable",
+//                    "com.example.birdfriend"
+//                )}
+//
+//            imgSrc.setImageResource(resourceID)
+//            cardList.addView(imgSrc)
+        }
+        */
+
         // add notification to button
 
         view.findViewById<Button>(R.id.temp_notify_button).setOnClickListener{
+            var cardMail = view.findViewById<LinearLayout>(R.id.mail_pop_up)
+            var window = PopupWindow(activity)
+            var view = layoutInflater.inflate(R.layout.dialog_mail_pop_up, null)
+            window.contentView = view
 
-            notificationManager = this.activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (context != null){
+                val db = UserCardsRoomDatabase.getDatabase(context)
+                val userCardList = db.userCardsDao().getAlluserCards()
+                val newPost = userCardList[0]
 
-            val intent = Intent(activity, LauncherActivityInfo::class.java)
-            val pendingIntent = PendingIntent.getActivity(activity,0,intent, 0)
-            notificationChannel = NotificationChannel(channelId, description,NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
+                var resourceID = resources.getIdentifier(
+                    newPost.imgname,
+                    "drawable",
+                    "com.example.birdfriend"
+                )
+                var imageView = view.findViewById<ImageView>(R.id.mail_view)
+                imageView.setImageResource(resourceID)
+            }
 
-            builder = Notification.Builder(activity, channelId)
-                .setContentTitle("Bird Notification:")
-                .setContentText("You got mail from your BirdFriend!")
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.bird_1)
 
-            notificationManager.notify(0, builder.build())
+            val addButton = view.findViewById<Button>(R.id.add_post_button)
+
+            addButton.setOnClickListener{
+                //TODO add fun to change db card status to true
+                setAddCardStatus()
+            }
+
+            val dismissButton = view.findViewById<Button>(R.id.mail_pop_up_dismiss)
+            dismissButton.setOnClickListener{
+                window.dismiss()
+            }
+
+            window.showAsDropDown(textview_first)
+
+
         }
 
 
     }
+
+    private fun setAddCardStatus(){
+        Log.d("FirstFragment","set add card status called!")
+    }
+
 }
+
+
+
+//RECORD
+/**
+view.findViewById<Button>(R.id.temp_notify_button).setOnClickListener{
+
+var window = PopupWindow(activity)
+var view = layoutInflater.inflate(R.layout.dialog_mail_pop_up, null)
+window.contentView = view
+var imageView = view.findViewById<ImageView>(R.id.mail_view)
+imageView.setBackgroundResource(R.drawable.fly_p3)
+
+val addButton = view.findViewById<Button>(R.id.add_post_button)
+
+addButton.setOnClickListener{
+//TODO add fun to change db card status to true
+setAddCardStatus()
+}
+val dismissButton = view.findViewById<Button>(R.id.mail_pop_up_dismiss)
+dismissButton.setOnClickListener{
+window.dismiss()
+}
+
+window.showAsDropDown(textview_first)
+}
+ */
+
+
+
+
+
+
 
 
 
