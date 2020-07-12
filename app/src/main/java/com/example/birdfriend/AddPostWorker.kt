@@ -57,6 +57,7 @@ class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
             dbCard.userCardsDao().insertCards(UserCards(nameToAdd, false ))
 
             Log.i("testing","$nameToAdd was added!")
+
         }else{
             Log.i("testing","nothing was added!")
         }

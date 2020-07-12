@@ -86,14 +86,19 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
-            setOneTimeWorkRequet()
-            Log.i("MainActivity", "setOneTimeWorkRequet2 was called")
+//            setOneTimeWorkRequet()
+//            Log.i("MainActivity", "setOneTimeWorkRequet was called")
+
+
+            //addpostwork request testing
+            setOneTimeAddPostWorkRequest()
+            Log.i("MainActivity", "setOneTimeAddPostWorkRequest was called")
+
 
             // below show how to log data to log_state_table
-
-            val db = LogStateDatabase.getDatabase(applicationContext)
-            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-            val currentDate = time.format(Date())
+//            val db = LogStateDatabase.getDatabase(applicationContext)
+//            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+//            val currentDate = time.format(Date())
             //Logging last record
 //            Log.d("log_data", db.logStateDao().getLastState()[0].creationDate.toString())
 
@@ -189,6 +194,27 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
+    }
+
+    //AddPostWorker Function
+    private fun setOneTimeAddPostWorkRequest(){
+        val workManager = WorkManager.getInstance(applicationContext)
+
+        val addPostLoad = OneTimeWorkRequest.Builder(AddPostWorker::class.java)
+            .build()
+        workManager.enqueue(addPostLoad)
+        workManager.beginUniqueWork("Unique",ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(AddPostWorker::class.java))
+        workManager.getWorkInfoByIdLiveData(addPostLoad.id)
+            .observe(this, Observer {
+                Log.d("log_data",it.state.name)
+
+                if(it.state.isFinished){
+                    Log.d("log_data","THIS IS WITHIN Add Post WORK REQUEST")
+                    Log.d("log_data","new post false was added to database!")
+                }
+
+
+            })
     }
 
 }
