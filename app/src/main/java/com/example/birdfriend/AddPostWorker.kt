@@ -1,17 +1,18 @@
 package com.example.birdfriend
 
+
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
+
     Worker(appContext, workerParams) {
-
-
     override fun doWork(): Result {
 
         // Do the work here--in this case, change show text display
@@ -31,6 +32,7 @@ class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
     }
 
     //set up func
+
     private  fun addNewPostCard(){
         //check if home or not
         val dbLog = LogStateDatabase.getDatabase(applicationContext)
@@ -60,9 +62,19 @@ class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
 
         }else{
             Log.i("testing","nothing was added!")
+
         }
 
 
     }
 
+    // add notification function
+//    fun sendNotificationWork(){
+//        MainActivity
+//    }
 }
+
+
+//RECORD
+
+

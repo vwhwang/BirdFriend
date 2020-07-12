@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
 
 //SET UP NOTIFICATION HERE IT WORKS!!!
 
-//        if (sendNewCard == true) {
-//            sendNewNotification()
-//        }
+        if (sendNewCard == true) {
+            sendNewNotification()
+        }
 
         //HERE WILL LOG DATA EVERYTIME APP ON CREATE//
         // OnCreate will fire home or away
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun sendNewNotification() {
+    public fun sendNewNotification() {
         notificationManager =
             this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -201,6 +201,7 @@ class MainActivity : AppCompatActivity() {
         val workManager = WorkManager.getInstance(applicationContext)
 
         val addPostLoad = OneTimeWorkRequest.Builder(AddPostWorker::class.java)
+            .setInitialDelay(30, TimeUnit.SECONDS)
             .build()
         workManager.enqueue(addPostLoad)
         workManager.beginUniqueWork("Unique",ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(AddPostWorker::class.java))
