@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
+
             //COMMENT OUT ONE TIME THIS BELOW WORKS
             setOneTimeWorkRequet()
             Log.i("MainActivity", "setOneTimeWorkRequet was called")
