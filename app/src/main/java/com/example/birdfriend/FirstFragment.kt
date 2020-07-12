@@ -109,9 +109,10 @@ class FirstFragment : Fragment() {
                     val addButton = view.findViewById<Button>(R.id.add_post_button)
 
                     addButton.setOnClickListener{
-                        //TODO add fun to change db card status to true
+                        //change db card status to true
                         db.userCardsDao().updateCard(newPost.imgname,true)
                         setAddCardStatus()
+                        window.dismiss()
                     }
                 }
 
@@ -134,36 +135,6 @@ class FirstFragment : Fragment() {
     }
 
 }
-
-
-
-//RECORD
-/**
-view.findViewById<Button>(R.id.temp_notify_button).setOnClickListener{
-
-var window = PopupWindow(activity)
-var view = layoutInflater.inflate(R.layout.dialog_mail_pop_up, null)
-window.contentView = view
-var imageView = view.findViewById<ImageView>(R.id.mail_view)
-imageView.setBackgroundResource(R.drawable.fly_p3)
-
-val addButton = view.findViewById<Button>(R.id.add_post_button)
-
-addButton.setOnClickListener{
-
-setAddCardStatus()
-}
-val dismissButton = view.findViewById<Button>(R.id.mail_pop_up_dismiss)
-dismissButton.setOnClickListener{
-window.dismiss()
-}
-
-window.showAsDropDown(textview_first)
-}
- */
-
-
-
 
 
 
