@@ -10,23 +10,16 @@ import android.content.pm.LauncherActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.work.ExistingWorkPolicy
-import androidx.work.WorkManager
 import androidx.work.OneTimeWorkRequest
-import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.birdfriend.HomeAwayWorker
-import kotlinx.android.synthetic.main.fragment_second.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -52,11 +45,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
 //SET UP NOTIFICATION HERE IT WORKS!!!
-
-//        if (sendNewCard == true) {
-//            sendNewNotification()
-//        }
-
 //        NotifyNewCard(applicationContext).sendAddPostNotification()
 
 
@@ -72,10 +60,6 @@ class MainActivity : AppCompatActivity() {
 //        dbLog.logStateDao().deleteAllState()
 //        dbLog.logStateDao().insertState(LogState(creationDate = "2020-07-11", stateHomeAway = "Home"))
 
-        //SETTING ONCREATE FOR HOME?
-
-//        setOneTimeWorkRequet()
-//        Log.i("MainActivity", "setOneTimeWorkRequet2 was called")
 
 
 
@@ -97,13 +81,6 @@ class MainActivity : AppCompatActivity() {
             setOneTimeAddPostWorkRequest()
             Log.i("MainActivity", "setOneTimeAddPostWorkRequest was called")
 
-
-            // below show how to log data to log_state_table
-//            val db = LogStateDatabase.getDatabase(applicationContext)
-//            val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-//            val currentDate = time.format(Date())
-            //Logging last record
-//            Log.d("log_data", db.logStateDao().getLastState()[0].creationDate.toString())
 
         }
 
@@ -178,7 +155,6 @@ class MainActivity : AppCompatActivity() {
         workManager.beginUniqueWork("Unique", ExistingWorkPolicy.KEEP , OneTimeWorkRequest.from(HomeAwayWorker::class.java))
         workManager.getWorkInfoByIdLiveData(backendLoad.id)
             .observe(this, Observer {
-//                textview_second.text = it.state.name
                 Log.d("log_data",it.state.name)
 
                 if(it.state.isFinished){
@@ -187,7 +163,7 @@ class MainActivity : AppCompatActivity() {
                     val time = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
                     val currentDate = time.format(Date())
                     val newState = data.getString(HomeAwayWorker.KEY_STATUS).toString()
-//                    db.logStateDao().insertState(LogState(creationDate = currentDate, stateHomeAway = newState))
+
 
                     Log.d("log_data","THIS IS WITHIN WORK REQUEST")
                     Log.d("log_data",db.logStateDao().getLastState()[0].uid.toString())
