@@ -51,9 +51,11 @@ class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
         val cardToAdd = postCardsList - existingCardName
 
         if (homeStatus == "Away" && cardToAdd.isEmpty() == false ){
-            //TODO add photo
-            var nameToAdd =
-            dbCard.userCardsDao().insertCards(UserCards(cardToAdd.shuffled()[0], false ))
+
+            var nameToAdd = cardToAdd.shuffled()[0]
+
+            dbCard.userCardsDao().insertCards(UserCards(nameToAdd, false ))
+
             Log.i("testing","$nameToAdd was added!")
         }else{
             Log.i("testing","nothing was added!")
