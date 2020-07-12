@@ -55,11 +55,11 @@ class MainActivity : AppCompatActivity() {
 
 
         // DELETE all records in logstate
-
+//
 //        val dbLog = LogStateDatabase.getDatabase(applicationContext)
 //        dbLog.logStateDao().deleteAllState()
-//        dbLog.logStateDao().insertState(LogState(creationDate = "2020-07-11", stateHomeAway = "Home"))
-
+//        dbLog.logStateDao().insertState(LogState(creationDate = "2020-07-12", stateHomeAway = "Home"))
+//
 
 
 
