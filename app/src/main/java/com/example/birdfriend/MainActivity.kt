@@ -53,9 +53,12 @@ class MainActivity : AppCompatActivity() {
 
 //SET UP NOTIFICATION HERE IT WORKS!!!
 
-        if (sendNewCard == true) {
-            sendNewNotification()
-        }
+//        if (sendNewCard == true) {
+//            sendNewNotification()
+//        }
+
+//        NotifyNewCard(applicationContext).sendAddPostNotification()
+
 
         //HERE WILL LOG DATA EVERYTIME APP ON CREATE//
         // OnCreate will fire home or away
@@ -86,8 +89,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
-//            setOneTimeWorkRequet()
-//            Log.i("MainActivity", "setOneTimeWorkRequet was called")
+            setOneTimeWorkRequet()
+            Log.i("MainActivity", "setOneTimeWorkRequet was called")
 
 
             //addpostwork request testing

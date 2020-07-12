@@ -1,17 +1,13 @@
 package com.example.birdfriend
 
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
 
-class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
-
+class AddPostWorker(val appContext: Context, workerParams: WorkerParameters):
     Worker(appContext, workerParams) {
     override fun doWork(): Result {
 
@@ -59,6 +55,8 @@ class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
             dbCard.userCardsDao().insertCards(UserCards(nameToAdd, false ))
 
             Log.i("testing","$nameToAdd was added!")
+            //Send notification
+            NotifyNewCard(appContext).sendAddPostNotification()
 
         }else{
             Log.i("testing","nothing was added!")
@@ -68,13 +66,10 @@ class AddPostWorker(appContext: Context, workerParams: WorkerParameters):
 
     }
 
-    // add notification function
-//    fun sendNotificationWork(){
-//        MainActivity
-//    }
+
 }
 
 
-//RECORD
+
 
 
