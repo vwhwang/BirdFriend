@@ -18,6 +18,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_first.*
@@ -85,35 +86,43 @@ class FirstFragment : Fragment() {
             var view = layoutInflater.inflate(R.layout.dialog_mail_pop_up, null)
             window.contentView = view
 
+
             if (context != null){
                 val db = UserCardsRoomDatabase.getDatabase(context)
-                val userCardList = db.userCardsDao().getAlluserCards()
-                val newPost = userCardList[0]
+                val userCardList = db.userCardsDao().getNewCards()
 
-                var resourceID = resources.getIdentifier(
-                    newPost.imgname,
-                    "drawable",
-                    "com.example.birdfriend"
-                )
-                var imageView = view.findViewById<ImageView>(R.id.mail_view)
-                imageView.setImageResource(resourceID)
-            }
+                if (userCardList.isNullOrEmpty()) {
+                    //Hide Add button
+                    val hideAddButton = view.findViewById<Button>(R.id.add_post_button)
+                    hideAddButton.isVisible = false
+                } else {
+                    val newPost = userCardList[0]
 
+                    var resourceID = resources.getIdentifier(
+                        newPost.imgname,
+                        "drawable",
+                        "com.example.birdfriend"
+                    )
+                    var imageView = view.findViewById<ImageView>(R.id.mail_view)
+                    imageView.setImageResource(resourceID)
 
-            val addButton = view.findViewById<Button>(R.id.add_post_button)
+                    val addButton = view.findViewById<Button>(R.id.add_post_button)
 
-            addButton.setOnClickListener{
-                //TODO add fun to change db card status to true
-                setAddCardStatus()
-            }
+                    addButton.setOnClickListener{
+                        //TODO add fun to change db card status to true
+                        db.userCardsDao().updateCard(newPost.imgname,true)
+                        setAddCardStatus()
+                    }
+                }
 
-            val dismissButton = view.findViewById<Button>(R.id.mail_pop_up_dismiss)
-            dismissButton.setOnClickListener{
-                window.dismiss()
+                val dismissButton = view.findViewById<Button>(R.id.mail_pop_up_dismiss)
+                dismissButton.setOnClickListener{
+                    window.dismiss()
+                }
+
             }
 
             window.showAsDropDown(textview_first)
-
 
         }
 

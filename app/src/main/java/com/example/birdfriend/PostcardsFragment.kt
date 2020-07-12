@@ -46,8 +46,11 @@ class PostcardsFragment : Fragment() {
 
             //current db has post_1 and post_2 already
 //            db.userCardsDao().insertCards(UserCards("post_2",true))
+//            db.userCardsDao().insertCards(UserCards("lao_post",false))
+//            db.userCardsDao().updateCard("post_1",false)
+//            db.userCardsDao().insertCards(UserCards("post_4",false))
 
-            val userCardList = db.userCardsDao().getAlluserCards()
+            val userCardList = db.userCardsDao().getShowCards()
 
             for (card in userCardList) {
 
