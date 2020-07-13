@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         var mainHomeStatus = "TBD"
         var sendNewCard = true
+        var setBird = (0..1).random()
     }
     @RequiresApi(Build.VERSION_CODES.O)
 
@@ -52,7 +53,8 @@ class MainActivity : AppCompatActivity() {
         //HERE WILL LOG DATA EVERYTIME APP ON CREATE//
         // OnCreate will fire home or away
 //        setOneTimeWorkRequet()
-//        Log.i("MainActivity", "setOneTimeWorkRequet was called")
+
+        Log.i("MainActivity", "onCreate was called")
 
 
         // DELETE all records in logstate
@@ -89,6 +91,17 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
+
+    //reset bird position when onRestart
+
+    override fun onRestart() {
+        super.onRestart()
+        setBird = (0..1).random()
+        Log.i("MainActivity","onRestart Called $setBird")
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public fun sendNewNotification() {
@@ -339,3 +352,37 @@ private fun setPerioticStateRequest(){
 
 }
         */
+
+
+//ForLogging
+
+/**
+
+//Learning
+override fun onResume() {
+super.onResume()
+Log.i("MainActivity","onResume Called")
+}
+
+override fun onPause() {
+super.onPause()
+Log.i("MainActivity","onPause Called")
+}
+
+override fun onStop() {
+super.onStop()
+Log.i("MainActivity","onStop Called")
+}
+
+override fun onDestroy() {
+super.onDestroy()
+Log.i("MainActivity","onDestroy Called")
+}
+
+override fun onRestart() {
+super.onRestart()
+setBird = (0..1).random()
+Log.i("MainActivity","onRestart Called $setBird")
+}
+////
+ */

@@ -2,6 +2,7 @@ package com.example.birdfriend
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,8 +77,8 @@ class SecondFragment : Fragment() {
                 sleepImage.isVisible = false
 
             } else {
-                // should only show one
-                setBirdPosition(view)
+                // show one position of animation
+                setBirdPosition(view,MainActivity.setBird)
 //                flyAnimation.start()
 //                sleepAnimation.start()
             }
@@ -88,7 +89,7 @@ class SecondFragment : Fragment() {
 
 
     // METHOD to random draw an animation
-    fun setBirdPosition(view: View){
+    fun setBirdPosition(view: View, position: Int){
         val sleepImage = view.findViewById<ImageView>(R.id.sleep).apply {
             setBackgroundResource(R.drawable.sleep_animation)
             sleepAnimation = background as AnimationDrawable
@@ -99,7 +100,9 @@ class SecondFragment : Fragment() {
             flyAnimation = background as AnimationDrawable
         }
 
-        val birdOptinos =  (0..1).random()
+        val birdOptinos =  position
+        //position 1 is fly, 0 is sleep etc.
+
 
         if (birdOptinos == 1 ){
             sleepImage.isVisible = false
@@ -113,3 +116,44 @@ class SecondFragment : Fragment() {
 
 
 }
+
+
+
+
+//Logging lifecycle
+/**
+///LEARNING
+override fun onCreate(savedInstanceState: Bundle?) {
+super.onCreate(savedInstanceState)
+Log.i("TitleFragment", "onCreate called")
+}
+override fun onActivityCreated(savedInstanceState: Bundle?) {
+super.onActivityCreated(savedInstanceState)
+Log.i("TitleFragment", "onActivityCreated called")
+}
+override fun onStart() {
+super.onStart()
+Log.i("TitleFragment", "onStart called")
+}
+override fun onResume() {
+super.onResume()
+Log.i("TitleFragment", "onResume called")
+}
+override fun onPause() {
+super.onPause()
+Log.i("TitleFragment", "onPause called")
+}
+override fun onStop() {
+super.onStop()
+Log.i("TitleFragment", "onStop called")
+}
+
+override fun onDestroyView() {
+super.onDestroyView()
+Log.i("TitleFragment", "onDestroyView called")
+}
+override fun onDetach() {
+super.onDetach()
+Log.i("TitleFragment", "onDetach called")
+}
+ */
