@@ -2,7 +2,6 @@ package com.example.birdfriend
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,7 @@ class SecondFragment : Fragment() {
 
     lateinit var flyAnimation: AnimationDrawable
     lateinit var pizzaAnimation: AnimationDrawable
+    lateinit var sleepAnimation: AnimationDrawable
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -49,9 +49,14 @@ class SecondFragment : Fragment() {
 
         }
 
-// try hide flyimage if away status
 //        Log.d("check", MainActivity.mainHomeStatus.toString())
 
+        //set up random activity : fly, sleep etc.
+
+        val sleepImage = view.findViewById<ImageView>(R.id.sleep).apply {
+            setBackgroundResource(R.drawable.sleep_animation)
+            sleepAnimation = background as AnimationDrawable
+        }
 
         val flyImage = view.findViewById<ImageView>(R.id.fly).apply {
             setBackgroundResource(R.drawable.animation)
@@ -68,6 +73,13 @@ class SecondFragment : Fragment() {
             val lastState = dbLogState.logStateDao().getLastState()
             if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Away") {
                 flyImage.isVisible = false
+                sleepImage.isVisible = false
+
+            } else {
+                // should only show one
+
+                flyAnimation.start()
+                sleepAnimation.start()
             }
         }
 
