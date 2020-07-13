@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [UserCards::class], version = 1, exportSchema = false)
+@Database(entities = [UserCards::class], version = 2, exportSchema = false)
 abstract class UserCardsRoomDatabase : RoomDatabase() {
     abstract fun userCardsDao(): UserCardsDao
 

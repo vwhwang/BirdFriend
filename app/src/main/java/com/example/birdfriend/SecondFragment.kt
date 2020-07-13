@@ -65,7 +65,8 @@ class SecondFragment : Fragment() {
         val context = activity?.applicationContext
         if (context != null) {
             val dbLogState = LogStateDatabase.getDatabase(context)
-            if (dbLogState.logStateDao().getLastState()[0].stateHomeAway == "Away"){
+            val lastState = dbLogState.logStateDao().getLastState()
+            if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Away") {
                 flyImage.isVisible = false
             }
         }
