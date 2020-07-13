@@ -1,5 +1,6 @@
 package com.example.birdfriend
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_postcards.*
+import android.content.Intent as Intent
 
 /**
  * A simple [Fragment] subclass.
@@ -85,6 +87,33 @@ class PostcardsFragment : Fragment() {
                     val dismissButton = view.findViewById<Button>(R.id.dismiss_button)
                     dismissButton.setOnClickListener{
                         window.dismiss()
+                    }
+
+                    val shareButton = view.findViewById<Button>(R.id.share_button)
+                    shareButton.setOnClickListener{
+                        var imageName = card.imgname
+                        val imageURI = Uri.parse("android.resource://com.example.birdfriend/"+resourceID)
+
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_STREAM, imageURI)
+                            putExtra(Intent.EXTRA_TEXT, "My bird friend went on an adventure today! $imageName")
+                            type = "image/jpg"
+                        }
+
+                        val shareIntent = Intent.createChooser(sendIntent, "Send your image:")
+                        startActivity(shareIntent)
+
+
+//                        val sendIntent: Intent = Intent().apply {
+//                            action = Intent.ACTION_SEND
+//                            putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+//                            type = "text/plain"
+//                        }
+//
+//                        val shareIntent = Intent.createChooser(sendIntent, null)
+//                        startActivity(shareIntent)
+                        Log.d("PostCardFragment", R.drawable.post_1.toString())
                     }
 
                     window.showAsDropDown(textView)
