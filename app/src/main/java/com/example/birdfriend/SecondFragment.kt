@@ -77,10 +77,36 @@ class SecondFragment : Fragment() {
 
             } else {
                 // should only show one
-
-                flyAnimation.start()
-                sleepAnimation.start()
+                setBirdPosition(view)
+//                flyAnimation.start()
+//                sleepAnimation.start()
             }
+        }
+
+    }
+
+
+
+    // METHOD to random draw an animation
+    fun setBirdPosition(view: View){
+        val sleepImage = view.findViewById<ImageView>(R.id.sleep).apply {
+            setBackgroundResource(R.drawable.sleep_animation)
+            sleepAnimation = background as AnimationDrawable
+        }
+
+        val flyImage = view.findViewById<ImageView>(R.id.fly).apply {
+            setBackgroundResource(R.drawable.animation)
+            flyAnimation = background as AnimationDrawable
+        }
+
+        val birdOptinos =  (0..1).random()
+
+        if (birdOptinos == 1 ){
+            sleepImage.isVisible = false
+            flyAnimation.start()
+        } else {
+            flyImage.isVisible = false
+            sleepAnimation.start()
         }
 
     }
