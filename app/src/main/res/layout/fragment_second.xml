@@ -71,7 +71,6 @@
         android:id="@+id/sleep"
         android:layout_width="155dp"
         android:layout_height="142dp"
-        android:src="@drawable/bird_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.832"
