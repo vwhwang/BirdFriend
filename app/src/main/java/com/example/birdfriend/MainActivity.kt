@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherActivityInfo
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -60,6 +61,8 @@ class MainActivity : AppCompatActivity() {
 //        dbLog.logStateDao().deleteAllState()
 //        dbLog.logStateDao().insertState(LogState(creationDate = "2020-07-12", stateHomeAway = "Home"))
 //
+
+        //set up audio
 
 
 
