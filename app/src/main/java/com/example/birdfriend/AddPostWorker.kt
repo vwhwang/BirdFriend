@@ -37,7 +37,7 @@ class AddPostWorker(val appContext: Context, workerParams: WorkerParameters):
         val dbCard = UserCardsRoomDatabase.getDatabase(applicationContext)
         val cardInAlbum = dbCard.userCardsDao().getShowCards()
 
-        val postCardsList = listOf("post_movie","post_moon","post_1","post_2","post_4","lao_post")
+        val postCardsList = listOf("post_movie","post_moon","post_1","post_2","post_4","lao_post","post_boat")
         //check all existing post names in db
 
         var existingCardName = mutableListOf<String>()

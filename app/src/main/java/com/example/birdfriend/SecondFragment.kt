@@ -2,6 +2,7 @@ package com.example.birdfriend
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -90,9 +91,15 @@ class SecondFragment : Fragment() {
                 val checkNight : Boolean = t > 1700 || t < 800
 //                Log.i("TitleFragment", "$checkNight")
 
+                if (checkNight){
+                    view.setBackgroundResource(R.drawable.couch_night)
+                    setBirdPosition(view,0)
+                } else {
+                    setBirdPosition(view,MainActivity.setBird)
+                }
 
                 // show one position of animation
-                setBirdPosition(view,MainActivity.setBird)
+
 //                flyAnimation.start()
 //                sleepAnimation.start()
             }
