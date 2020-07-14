@@ -11,6 +11,8 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -77,6 +79,18 @@ class SecondFragment : Fragment() {
                 sleepImage.isVisible = false
 
             } else {
+                //Night Time Always show sleeping
+
+                val currentTime = Date()
+                val c = Calendar.getInstance()
+                c.time = currentTime
+                val t = c[Calendar.HOUR_OF_DAY] * 100 + c[Calendar.MINUTE]
+                //Test daytime 9am
+//              val t = 900
+                val checkNight : Boolean = t > 1700 || t < 800
+//                Log.i("TitleFragment", "$checkNight")
+
+
                 // show one position of animation
                 setBirdPosition(view,MainActivity.setBird)
 //                flyAnimation.start()
