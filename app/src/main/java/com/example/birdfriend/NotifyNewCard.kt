@@ -30,6 +30,7 @@ class NotifyNewCard(val context: Context){
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.ic_stat_name)
 
+
         with (NotificationManagerCompat.from(context)) {
             notify(0, builder.build())
         }
