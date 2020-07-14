@@ -28,7 +28,7 @@ class NotifyNewCard(val context: Context){
             .setContentText("You got mail from your BirdFriend!")
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
-            .setSmallIcon(R.drawable.bird_1)
+            .setSmallIcon(R.drawable.ic_stat_name)
 
         with (NotificationManagerCompat.from(context)) {
             notify(0, builder.build())

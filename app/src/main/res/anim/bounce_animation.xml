@@ -10,5 +10,6 @@
         android:toXScale="0.5"
         android:toYScale="1.0"
         android:repeatCount="infinite"/>
+
 </set>
 
