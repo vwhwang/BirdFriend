@@ -1,5 +1,6 @@
 package com.example.birdfriend
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -7,16 +8,16 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherActivityInfo
+import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.PopupWindow
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_postcards.*
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
+
     // added for notification
     lateinit var notificationManager: NotificationManager
     lateinit var notificationChannel: NotificationChannel
@@ -43,6 +45,7 @@ class FirstFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
+    @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,6 +79,16 @@ class FirstFragment : Fragment() {
 
 
             }
+        }
+
+        // bounce animation
+        val bounceAnimation = AnimationUtils.loadAnimation(activity?.applicationContext,R.anim.bounce_animation)
+        val letterView = view.findViewById<ImageView>(R.id.letter_img)
+//        letterView.startAnimation(bounceAnimation)
+        val db = activity?.applicationContext?.let { UserCardsRoomDatabase.getDatabase(it) }
+        val showLetterOrNot = db?.userCardsDao()?.getNewCards().isNullOrEmpty()
+        if (!showLetterOrNot){
+            letterView.startAnimation(bounceAnimation)
         }
 
         // MAIL BOX POP UP
@@ -113,6 +126,7 @@ class FirstFragment : Fragment() {
                         db.userCardsDao().updateCard(newPost.imgname,true)
                         setAddCardStatus()
                         window.dismiss()
+                        letterView.clearAnimation()
                     }
                 }
 
@@ -126,6 +140,7 @@ class FirstFragment : Fragment() {
             window.showAsDropDown(textview_first)
 
         }
+
 
 
     }
