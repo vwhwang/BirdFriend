@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_postcards.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -81,10 +82,20 @@ class FirstFragment : Fragment() {
             }
         }
 
+        // Night background after 17pm and before 8am
+
+        val currentTime = Date()
+        val c = Calendar.getInstance()
+        c.time = currentTime
+        val t = c[Calendar.HOUR_OF_DAY] * 100 + c[Calendar.MINUTE]
+        val checkNight : Boolean = t > 1700 || t < 800
+        if (checkNight){
+            view.setBackgroundResource(R.drawable.trash_night)
+        }
+
         // bounce animation
         val bounceAnimation = AnimationUtils.loadAnimation(activity?.applicationContext,R.anim.bounce_animation)
         val letterView = view.findViewById<ImageView>(R.id.letter_img)
-//        letterView.startAnimation(bounceAnimation)
         val db = activity?.applicationContext?.let { UserCardsRoomDatabase.getDatabase(it) }
         val showLetterOrNot = db?.userCardsDao()?.getNewCards().isNullOrEmpty()
         if (!showLetterOrNot){
