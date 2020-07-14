@@ -58,7 +58,6 @@ class PostcardsFragment : Fragment() {
 
                 val imgSrc = ImageView(getActivity())
                 imgSrc.layoutParams = LinearLayout.LayoutParams(400, 400)
-
                 //setting up imagename to resourceID
 
                 var resourceID = resources.getIdentifier(
