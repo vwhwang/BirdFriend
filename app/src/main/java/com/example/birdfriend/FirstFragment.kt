@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_postcards.*
 import java.util.*
@@ -81,6 +82,8 @@ class FirstFragment : Fragment() {
 
             }
         }
+
+
 
         // Night background after 17pm and before 8am
 
@@ -151,7 +154,6 @@ class FirstFragment : Fragment() {
             window.showAsDropDown(textview_first)
 
         }
-
 
 
     }

@@ -13,8 +13,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
@@ -38,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         var mainHomeStatus = "TBD"
         var sendNewCard = true
         var setBird = (0..1).random()
+
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +79,22 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
+        val packbutton = findViewById<FloatingActionButton>(R.id.fab)
+
+
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            //if Home show stuff packed if not show he's not home yet.
+
+            val dbLogState = LogStateDatabase.getDatabase(applicationContext)
+            val lastState = dbLogState.logStateDao().getLastState()
+
+            if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Home") {
+                Toast.makeText(applicationContext,"apples are packed!",Toast.LENGTH_LONG).show()
+                packbutton.isVisible = false
+            } else {
+                Toast.makeText(applicationContext,"bird is not home yet!",Toast.LENGTH_LONG).show()
+                packbutton.isVisible = false
+            }
 
 
             //COMMENT OUT ONE TIME THIS BELOW WORKS
@@ -86,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             //addpostwork request testing
             setOneTimeAddPostWorkRequest()
             Log.i("MainActivity", "setOneTimeAddPostWorkRequest was called")
+
 
 
         }
@@ -100,6 +120,22 @@ class MainActivity : AppCompatActivity() {
         super.onRestart()
         setBird = (0..1).random()
         Log.i("MainActivity","onRestart Called $setBird")
+
+        //onRestart make it random to show pack or not always show for now
+        val packbutton = findViewById<FloatingActionButton>(R.id.fab)
+        val dbLogState = LogStateDatabase.getDatabase(applicationContext)
+        val lastState = dbLogState.logStateDao().getLastState()
+
+        if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Home") {
+            packbutton.isVisible = true
+        } else {
+            if (setBird == 1 ){
+                packbutton.isVisible = true
+            } else {
+                packbutton.isVisible = false
+            }
+        }
+
     }
 
 
