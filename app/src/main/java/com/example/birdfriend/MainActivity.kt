@@ -83,16 +83,23 @@ class MainActivity : AppCompatActivity() {
 
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            //set up message random messages to show
+            val messagesToShow = listOf<String>("some apples are packed!", "some love is packed!",
+                "a dagger is packed...", "some wine is packed!!!","a powerful lucky charm is packed.","a rain coat is packed!")
+            var message = messagesToShow.shuffled()[0]
             //if Home show stuff packed if not show he's not home yet.
 
             val dbLogState = LogStateDatabase.getDatabase(applicationContext)
             val lastState = dbLogState.logStateDao().getLastState()
 
             if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Home") {
-                Toast.makeText(applicationContext,"apples are packed!",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,message,Toast.LENGTH_LONG).show()
+                packbutton.isVisible = false
+            } else if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Away"){
+                Toast.makeText(applicationContext,"bird is not home yet!",Toast.LENGTH_LONG).show()
                 packbutton.isVisible = false
             } else {
-                Toast.makeText(applicationContext,"bird is not home yet!",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"$1000 is packed for bird to use!",Toast.LENGTH_LONG).show()
                 packbutton.isVisible = false
             }
 

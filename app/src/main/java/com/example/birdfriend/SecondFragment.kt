@@ -69,6 +69,7 @@ class SecondFragment : Fragment() {
 //        flyAnimation.start()
             flyImage.setOnClickListener({ flyAnimation.start() })
 
+        val bagImage = view.findViewById<ImageView>(R.id.bag)
 
 // HOME OR NOT CALL FROM LOG STATE
         val context = activity?.applicationContext
@@ -78,6 +79,7 @@ class SecondFragment : Fragment() {
             if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Away") {
                 flyImage.isVisible = false
                 sleepImage.isVisible = false
+                bagImage.isVisible = false
 
             } else {
                 //Night Time Always show sleeping
