@@ -7,7 +7,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherActivityInfo
-import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         // OnCreate will fire home or away
 //        setOneTimeWorkRequet()
 
-        Log.i("MainActivity", "onCreate was called")
+        Log.i("MainActivity", "onCreate was called.")
 
 
         // DELETE all records in logstate
@@ -116,20 +115,11 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-
-    }
-
-
-
-    //reset bird position when onRestart
-
-    override fun onRestart() {
-        super.onRestart()
+        //set up bird random positions
         setBird = (0..1).random()
-        Log.i("MainActivity","onRestart Called $setBird")
+        Log.i("MainActivity","onCreated Called $setBird")
 
-        //onRestart make it random to show pack or not always show for now
-        val packbutton = findViewById<FloatingActionButton>(R.id.fab)
+
         val dbLogState = LogStateDatabase.getDatabase(applicationContext)
         val lastState = dbLogState.logStateDao().getLastState()
 
@@ -143,7 +133,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
     }
+
+//default to main activity evertime restarts
+    override fun onStop() {
+        super.onStop()
+        this.finish()
+        Log.i("MainActivity","onStop Called")
+    }
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -262,20 +262,43 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //NOTES//
+
+
+
+//reset bird position when onRestart
+/**
+override fun onRestart() {
+super.onRestart()
+setBird = (0..1).random()
+Log.i("MainActivity","onRestart Called $setBird")
+
+//onRestart make it random to show pack or not always show for now
+val packbutton = findViewById<FloatingActionButton>(R.id.fab)
+val dbLogState = LogStateDatabase.getDatabase(applicationContext)
+val lastState = dbLogState.logStateDao().getLastState()
+
+if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Home") {
+packbutton.isVisible = true
+} else {
+if (setBird == 1 ){
+packbutton.isVisible = true
+} else {
+packbutton.isVisible = false
+}
+}
+
+// this will start main activity
+
+val returnBtn = Intent(
+applicationContext,
+MainActivity::class.java
+)
+startActivity(returnBtn)
+
+}
+ */
+
 
 
 // PEREODIC WORK EXAMPLE I

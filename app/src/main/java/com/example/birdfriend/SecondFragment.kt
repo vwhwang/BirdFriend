@@ -110,7 +110,6 @@ class SecondFragment : Fragment() {
     }
 
 
-
     // METHOD to random draw an animation
     fun setBirdPosition(view: View, position: Int){
         val sleepImage = view.findViewById<ImageView>(R.id.sleep).apply {
