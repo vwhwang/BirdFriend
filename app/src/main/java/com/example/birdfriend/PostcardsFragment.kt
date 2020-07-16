@@ -112,7 +112,6 @@ class PostcardsFragment : Fragment() {
 //
 //                        val shareIntent = Intent.createChooser(sendIntent, null)
 //                        startActivity(shareIntent)
-                        Log.d("PostCardFragment", R.drawable.post_1.toString())
                     }
 
                     window.showAsDropDown(textView)
