@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.PopupWindow
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_postcards.*
@@ -43,7 +40,14 @@ class PostcardsFragment : Fragment() {
 
         if (context != null) {
             val db = UserCardsRoomDatabase.getDatabase(context)
+//Button to delete all
 
+            view.findViewById<Button>(R.id.delete_all_button).setOnClickListener{
+                db.userCardsDao().deleteAll()
+                Log.d("PostCardFragment", "all cards deleted!")
+                findNavController().navigate(R.id.action_PostcardsFragment_to_SecondFragment)
+                Toast.makeText(activity,"Deleted All Post Cards", Toast.LENGTH_LONG).show()
+            }
 //            db.userCardsDao().deleteAll()
 
             //CODES TO MANUALLY UPDATE DATA FOR TESTING
