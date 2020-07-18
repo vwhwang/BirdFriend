@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         var mainHomeStatus = "TBD"
         var sendNewCard = true
-        var setBird = (0..1).random()
+        var setBird = (0..2).random()
 
     }
 
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         //set up bird random positions
-        setBird = (0..1).random()
+        setBird = (0..2).random()
         Log.i("MainActivity","onCreated Called $setBird")
 
 

@@ -24,6 +24,7 @@ class SecondFragment : Fragment() {
     lateinit var flyAnimation: AnimationDrawable
     lateinit var pizzaAnimation: AnimationDrawable
     lateinit var sleepAnimation: AnimationDrawable
+    lateinit var playAnimation: AnimationDrawable
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +57,12 @@ class SecondFragment : Fragment() {
 //        Log.d("check", MainActivity.mainHomeStatus.toString())
 
         //set up random activity : fly, sleep etc.
+        val playImage = view.findViewById<ImageView>(R.id.play).apply {
+            setBackgroundResource(R.drawable.play_animation)
+            playAnimation = background as AnimationDrawable
+        }
 
+        playAnimation.start()
         val sleepImage = view.findViewById<ImageView>(R.id.sleep).apply {
             setBackgroundResource(R.drawable.sleep_animation)
             sleepAnimation = background as AnimationDrawable
@@ -76,22 +82,27 @@ class SecondFragment : Fragment() {
         if (context != null) {
             val dbLogState = LogStateDatabase.getDatabase(context)
             val lastState = dbLogState.logStateDao().getLastState()
+            //Night Time Always show darkbackground 1700 is 5pm
+
+            val currentTime = Date()
+            val c = Calendar.getInstance()
+            c.time = currentTime
+            val t = c[Calendar.HOUR_OF_DAY] * 100 + c[Calendar.MINUTE]
+            val checkNight : Boolean = t > 1700 || t < 800
+
+            Log.i("TitleFragment", "$checkNight")
+
             if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Away") {
                 flyImage.isVisible = false
                 sleepImage.isVisible = false
+                playImage.isVisible = false
                 bagImage.isVisible = false
 
-            } else {
-                //Night Time Always show sleeping
+                if (checkNight){
+                    view.setBackgroundResource(R.drawable.couch_night)
+                }
 
-                val currentTime = Date()
-                val c = Calendar.getInstance()
-                c.time = currentTime
-                val t = c[Calendar.HOUR_OF_DAY] * 100 + c[Calendar.MINUTE]
-                //Test daytime 9am
-//              val t = 900
-                val checkNight : Boolean = t > 1700 || t < 800
-//                Log.i("TitleFragment", "$checkNight")
+            } else {
 
                 if (checkNight){
                     view.setBackgroundResource(R.drawable.couch_night)
@@ -122,15 +133,26 @@ class SecondFragment : Fragment() {
             flyAnimation = background as AnimationDrawable
         }
 
+        val playImage = view.findViewById<ImageView>(R.id.play).apply {
+            setBackgroundResource(R.drawable.play_animation)
+            playAnimation = background as AnimationDrawable
+        }
+
         val birdOptinos =  position
-        //position 1 is fly, 0 is sleep etc.
+        //position 1 is fly, 0 is sleep , 2 is play
 
 
         if (birdOptinos == 1 ){
             sleepImage.isVisible = false
+            playImage.isVisible = false
             flyAnimation.start()
-        } else {
+        } else if (birdOptinos == 2){
             flyImage.isVisible = false
+            sleepImage.isVisible = false
+            playAnimation.start()
+        }else {
+            flyImage.isVisible = false
+            playImage.isVisible = false
             sleepAnimation.start()
         }
 
