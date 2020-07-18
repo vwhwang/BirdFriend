@@ -28,6 +28,11 @@
         <action
             android:id="@+id/action_SecondFragment_to_PostcardsFragment"
             app:destination="@id/PostcardsFragment" />
+
+
+        <action
+            android:id="@+id/action_SecondFragment_to_CameraFragment"
+            app:destination="@id/CameraFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +43,17 @@
 
         <action
             android:id="@+id/action_PostcardsFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CameraFragment"
+        android:name="com.example.birdfriend.CameraFragment"
+        android:label="Camera Fragment"
+        tools:layout="@layout/fragment_camera">
+
+        <action
+            android:id="@+id/action_CameraFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>

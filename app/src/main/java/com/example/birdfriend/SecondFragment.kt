@@ -45,6 +45,10 @@ class SecondFragment : Fragment() {
             findNavController().navigate(R.id.action_SecondFragment_to_PostcardsFragment)
         }
 
+        view.findViewById<Button>(R.id.camera_button).setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_CameraFragment)
+        }
+
         view.findViewById<Button>(R.id.pizza_button).setOnClickListener {
             val pizzaImage = view.findViewById<ImageView>(R.id.fly).apply {
                 setBackgroundResource(R.drawable.pizza_animation)

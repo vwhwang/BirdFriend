@@ -23,4 +23,6 @@
     <string name="add">Add</string>
     <string name="post_cards_from_bird">Post Cards from bird!</string>
     <string name="delete_all">Delete All</string>
+    <string name="back">Back</string>
+    <string name="camera">Camera</string>
 </resources>
