@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//default to main activity evertime restarts
+//default to main activity evertime restarts - had to comment it out since need camera fragement to work.
 //    override fun onStop() {
 //        super.onStop()
 //        this.finish()
