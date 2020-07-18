@@ -137,13 +137,22 @@ class MainActivity : AppCompatActivity() {
     }
 
 //default to main activity evertime restarts
-    override fun onStop() {
-        super.onStop()
-        this.finish()
-        Log.i("MainActivity","onStop Called")
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        this.finish()
+//        Log.i("MainActivity","onStop Called")
+//    }
 
-
+//    override fun onRestart() {
+//        super.onRestart()
+//
+//        val returnBtn = Intent(
+//            applicationContext,
+//            MainActivity::class.java
+//        )
+//        startActivity(returnBtn)
+//
+//    }
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
