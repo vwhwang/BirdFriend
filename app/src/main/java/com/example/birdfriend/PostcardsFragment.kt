@@ -1,5 +1,8 @@
 package com.example.birdfriend
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -43,12 +46,42 @@ class PostcardsFragment : Fragment() {
 //Button to delete all
 
             view.findViewById<Button>(R.id.delete_all_button).setOnClickListener{
-                db.userCardsDao().deleteAll()
-                Log.d("PostCardFragment", "all cards deleted!")
-                findNavController().navigate(R.id.action_PostcardsFragment_to_SecondFragment)
-                Toast.makeText(activity,"Deleted All Post Cards", Toast.LENGTH_LONG).show()
+                // build alert dialog
+                val dialogBuilder = AlertDialog.Builder(activity)
+
+                // set message of alert dialog
+                dialogBuilder.setMessage("Do you want to delete all postcards?")
+                    // if the dialog is cancelable
+                    .setCancelable(false)
+                    // positive button text and action
+                    .setPositiveButton("Yes", DialogInterface.OnClickListener {
+                            dialog, id ->
+                            db.userCardsDao().deleteAll()
+                            findNavController().navigate(R.id.action_PostcardsFragment_to_SecondFragment)
+                            Toast.makeText(activity,"Deleted All Post Cards", Toast.LENGTH_LONG).show()
+                    })
+                    // negative button text and action
+                    .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                            dialog, id -> dialog.cancel()
+                    })
+
+                // create dialog box
+                val alert = dialogBuilder.create()
+                // set title for alert dialog box
+                alert.setTitle("Delete action:")
+                // show alert dialog
+                alert.show()
             }
-//            db.userCardsDao().deleteAll()
+
+
+
+//            view.findViewById<Button>(R.id.delete_all_button).setOnClickListener{
+//                db.userCardsDao().deleteAll()
+//                Log.d("PostCardFragment", "all cards deleted!")
+//                findNavController().navigate(R.id.action_PostcardsFragment_to_SecondFragment)
+//                Toast.makeText(activity,"Deleted All Post Cards", Toast.LENGTH_LONG).show()
+//            }
+
 
             //CODES TO MANUALLY UPDATE DATA FOR TESTING
 //            db.userCardsDao().insertCards(UserCards("post_2",true))
