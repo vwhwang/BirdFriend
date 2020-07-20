@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:adjustViewBounds="true"
+    android:scaleType="fitCenter">
 
-    <item android:drawable="@drawable/bird_1"
+    <item android:drawable="@drawable/pizza_p1"
         android:duration="400"/>
-    <item android:drawable="@drawable/bird_2"
+    <item android:drawable="@drawable/pizza_p2"
+        android:duration="400"/>
+
+    <item android:drawable="@drawable/pizza_p3"
+        android:duration="400"/>
+    <item android:drawable="@drawable/pizza_p4"
         android:duration="400"/>
 
 </animation-list>

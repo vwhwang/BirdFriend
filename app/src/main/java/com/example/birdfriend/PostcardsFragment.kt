@@ -94,7 +94,7 @@ class PostcardsFragment : Fragment() {
             for (card in userCardList) {
 
                 val imgSrc = ImageView(getActivity())
-                imgSrc.layoutParams = LinearLayout.LayoutParams(600, 600)
+                imgSrc.layoutParams = LinearLayout.LayoutParams(600, 650)
                 //setting up imagename to resourceID
 
                 var resourceID = resources.getIdentifier(

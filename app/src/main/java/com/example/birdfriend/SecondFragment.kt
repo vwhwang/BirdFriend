@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -49,14 +50,6 @@ class SecondFragment : Fragment() {
             findNavController().navigate(R.id.action_SecondFragment_to_CameraFragment)
         }
 
-        view.findViewById<Button>(R.id.pizza_button).setOnClickListener {
-            val pizzaImage = view.findViewById<ImageView>(R.id.fly).apply {
-                setBackgroundResource(R.drawable.pizza_animation)
-                pizzaAnimation = background as AnimationDrawable
-            }
-            pizzaAnimation.start()
-
-        }
 
 //        Log.d("check", MainActivity.mainHomeStatus.toString())
 
@@ -66,7 +59,7 @@ class SecondFragment : Fragment() {
             playAnimation = background as AnimationDrawable
         }
 
-        playAnimation.start()
+
         val sleepImage = view.findViewById<ImageView>(R.id.sleep).apply {
             setBackgroundResource(R.drawable.sleep_animation)
             sleepAnimation = background as AnimationDrawable
@@ -77,9 +70,42 @@ class SecondFragment : Fragment() {
             flyAnimation = background as AnimationDrawable
         }
 //        flyAnimation.start()
-            flyImage.setOnClickListener({ flyAnimation.start() })
+//            flyImage.setOnClickListener({ flyAnimation.start() })
 
         val bagImage = view.findViewById<ImageView>(R.id.bag)
+
+
+
+        // Pizza button
+
+        val pizzaImage = view.findViewById<ImageView>(R.id.bird_eat_pizza).apply {
+            setBackgroundResource(R.drawable.pizza_animation)
+            pizzaAnimation = background as AnimationDrawable
+        }
+
+        view.findViewById<Button>(R.id.pizza_button).setOnClickListener {
+
+            val dbLogState = activity?.applicationContext?.let { it1 ->
+                LogStateDatabase.getDatabase(
+                    it1
+                )
+            }
+            val lastState = dbLogState?.logStateDao()?.getLastState()
+
+            if (lastState != null) {
+                if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Away") {
+                    Toast.makeText(activity,"Bird is not home yet",Toast.LENGTH_LONG).show()
+                }else {
+                    pizzaImage.isVisible = true
+                    pizzaAnimation.start()
+                    flyImage.isVisible = false
+                    sleepImage.isVisible = false
+                    playImage.isVisible = false
+                }
+            }
+
+        }
+
 
 // HOME OR NOT CALL FROM LOG STATE
         val context = activity?.applicationContext
@@ -101,6 +127,7 @@ class SecondFragment : Fragment() {
                 sleepImage.isVisible = false
                 playImage.isVisible = false
                 bagImage.isVisible = false
+                pizzaImage.isVisible = false
 
                 if (checkNight){
                     view.setBackgroundResource(R.drawable.couch_night)
@@ -142,6 +169,11 @@ class SecondFragment : Fragment() {
             playAnimation = background as AnimationDrawable
         }
 
+        val pizzaImage = view.findViewById<ImageView>(R.id.bird_eat_pizza).apply {
+            setBackgroundResource(R.drawable.pizza_animation)
+            pizzaAnimation = background as AnimationDrawable
+        }
+
         val birdOptinos =  position
         //position 1 is fly, 0 is sleep , 2 is play
 
@@ -149,14 +181,17 @@ class SecondFragment : Fragment() {
         if (birdOptinos == 1 ){
             sleepImage.isVisible = false
             playImage.isVisible = false
+            pizzaImage.isVisible = false
             flyAnimation.start()
         } else if (birdOptinos == 2){
             flyImage.isVisible = false
             sleepImage.isVisible = false
+            pizzaImage.isVisible = false
             playAnimation.start()
         }else {
             flyImage.isVisible = false
             playImage.isVisible = false
+            pizzaImage.isVisible = false
             sleepAnimation.start()
         }
 
