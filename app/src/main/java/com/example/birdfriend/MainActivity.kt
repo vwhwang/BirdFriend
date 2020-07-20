@@ -136,6 +136,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    override fun onRestart() {
+        super.onRestart()
+        setBird = (0..2).random()
+        Log.i("MainActivity", "onRestart Called $setBird")
+
+        //onRestart make it random to show pack or not always show for now
+        val packbutton = findViewById<FloatingActionButton>(R.id.fab)
+        val dbLogState = LogStateDatabase.getDatabase(applicationContext)
+        val lastState = dbLogState.logStateDao().getLastState()
+
+        if (lastState.isNotEmpty() && lastState.first().stateHomeAway == "Home") {
+            packbutton.isVisible = true
+        } else {
+            if (setBird == 1) {
+                packbutton.isVisible = true
+            } else {
+                packbutton.isVisible = false
+            }
+        }
+    }
+
 //default to main activity evertime restarts - had to comment it out since need camera fragement to work.
 //    override fun onStop() {
 //        super.onStop()
