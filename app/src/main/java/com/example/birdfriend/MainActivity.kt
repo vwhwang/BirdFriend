@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity() {
         //HERE WILL LOG DATA EVERYTIME APP ON CREATE//
         // OnCreate will fire home or away
 //        setOneTimeWorkRequet()
+
+        //hide toolbar
+        getSupportActionBar()?.hide()
 
         Log.i("MainActivity", "onCreate was called.")
 
