@@ -35,13 +35,13 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/out2"
+        android:background="@drawable/out3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fly"
-        app:layout_constraintVertical_bias="0.899" />
+        app:layout_constraintVertical_bias="0.928" />
 
     <Button
         android:id="@+id/postcards_button"
