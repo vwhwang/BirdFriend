@@ -48,12 +48,13 @@
         android:id="@+id/show_log_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="log"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/temp_notify_button"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.837" />
+        app:layout_constraintVertical_bias="0.693" />
 
     <ImageView
         android:id="@+id/letter_img"
