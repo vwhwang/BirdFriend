@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/fly"
-        android:layout_width="192dp"
-        android:layout_height="201dp"
+        android:layout_width="151dp"
+        android:layout_height="144dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.926"
@@ -34,14 +34,13 @@
         android:id="@+id/outside_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
         android:background="@drawable/out3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fly"
-        app:layout_constraintVertical_bias="0.928" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
 
     <Button
         android:id="@+id/postcards_button"
@@ -57,15 +56,15 @@
 
     <Button
         android:id="@+id/pizza_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pizza"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/pizza"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        app:layout_constraintVertical_bias="0.797" />
 
     <ImageView
         android:id="@+id/sleep"
@@ -115,14 +114,14 @@
 
     <ImageView
         android:id="@+id/bird_eat_pizza"
-        android:layout_width="180dp"
-        android:layout_height="176dp"
+        android:layout_width="156dp"
+        android:layout_height="166dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.342"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.764" />
 </androidx.constraintlayout.widget.ConstraintLayout>
