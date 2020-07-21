@@ -5,14 +5,16 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +24,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import java.io.OutputStream
 
@@ -166,8 +169,15 @@ class CameraFragment : Fragment() {
             canvas = Canvas(youAndBird)
             // Draw the image bitmap into the cavas
             canvas.drawBitmap(youAndBird, 0.0f, 0.0f, null)
-            val bird = context?.getDrawable(R.drawable.fly_p1)
-            canvas.drawBitmap(bird!!.toBitmap(), 0f, 0f, null)
+            val bMap = BitmapFactory.decodeResource(resources, R.drawable.fly_p1)
+            //resize bird
+            val bMapScaled = Bitmap.createScaledBitmap(bMap, 1000, 1000, true)
+
+            //position to top right corner
+            val userWidth = youAndBird.width
+            val userHeight = youAndBird.height
+
+            canvas.drawBitmap(bMapScaled, userWidth - 1500f, userHeight - 3000f, null)
 
             // Attach the canvas to the ImageView
             loadimage?.setImageDrawable(BitmapDrawable(resources, youAndBird))
@@ -176,3 +186,4 @@ class CameraFragment : Fragment() {
     }
 
 }
+
