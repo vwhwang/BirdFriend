@@ -55,23 +55,28 @@ class CameraFragment : Fragment() {
 
         val context = activity?.applicationContext
         view.findViewById<Button>(R.id.upload_button).setOnClickListener {
+            Log.d("crash", "in button onSetClickListener")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Log.d("crash", "in version m section")
                 if (context?.let { it1 ->
                         ContextCompat.checkSelfPermission(
                             it1,
                             Manifest.permission.CAMERA
                         )
                     } == PackageManager.PERMISSION_DENIED) {
+                    Log.d("crash", "doesn't have camera permission")
                     val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
                     requestPermissions(
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                         PERMISSION_CODE
                     )
                 } else {
+                    Log.d("crash", "has permission")
                     //permission already granted
                     pickImageFromGallery();
                 }
             }
+            Log.d("crash", "leaving onSetClickListener")
         }
 
         val shareButton = view.findViewById<Button>(R.id.share_load_button).setOnClickListener {
@@ -103,12 +108,14 @@ class CameraFragment : Fragment() {
     }
 
     private fun pickImageFromGallery() {
+        Log.d("crash", "in pickImageFromGallery")
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(
             intent,
             IMAGE_PICK_CODE
         ) // GIVE AN INTEGER VALUE FOR IMAGE_PICK_CODE LIKE 1000
+        Log.d("crash", "leaving pickImageFromGallery")
     }
 
     //handle requested permission result
@@ -117,6 +124,7 @@ class CameraFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        Log.d("crash", "in onRequestPermissionsResult")
         when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.size > 0 && grantResults[0] ==
@@ -130,26 +138,31 @@ class CameraFragment : Fragment() {
                 }
             }
         }
+        Log.d("crash", "leaving onRequestPermissionResult")
     }
 
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("crash", "in onActivityResult")
         val loadimage = requireActivity().findViewById<ImageView>(R.id.load_image)
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-
-            val imageUri: Uri = data!!.data!!
-            val original =
-                ImageDecoder.decodeBitmap(
-                    ImageDecoder.createSource(
-                        requireActivity().contentResolver,
-                        imageUri
+            if (data != null && data.data != null) {
+                Log.d("crash", "data is not null")
+                val imageUri: Uri = data.data!!
+                val original =
+                    ImageDecoder.decodeBitmap(
+                        ImageDecoder.createSource(
+                            requireActivity().contentResolver,
+                            imageUri
+                        )
                     )
-                )
-            youAndBird = original.copy(Bitmap.Config.ARGB_8888, true)
-            Log.d("photo", data.data.toString())
-            Log.d("photo", "it worked here!")
-
+                youAndBird = original.copy(Bitmap.Config.ARGB_8888, true)
+                Log.d("photo", data.data.toString())
+                Log.d("photo", "it worked here!")
+            } else {
+                Log.d("crash", "data is null")
+            }
             canvas = Canvas(youAndBird)
             // Draw the image bitmap into the cavas
             canvas.drawBitmap(youAndBird, 0.0f, 0.0f, null)
@@ -159,6 +172,7 @@ class CameraFragment : Fragment() {
             // Attach the canvas to the ImageView
             loadimage?.setImageDrawable(BitmapDrawable(resources, youAndBird))
         }
+        Log.d("crash", "leaving onActivityResult")
     }
 
 }
