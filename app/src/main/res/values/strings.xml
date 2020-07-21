@@ -26,5 +26,6 @@
     <string name="back">Back</string>
     <string name="camera">Camera</string>
     <string name="select_your_photo">Select Your Photo</string>
+    <string name="put_a_bird_on_it">Put a bird on it!</string>
 
 </resources>
