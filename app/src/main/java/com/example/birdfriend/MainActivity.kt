@@ -140,44 +140,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-//    public fun sendNewNotification() {
-//        notificationManager =
-//            this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//
-//        val intent = Intent(this, LauncherActivityInfo::class.java)
-//        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            notificationChannel =
-//            NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            notificationChannel.enableLights(true)
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            notificationChannel.enableVibration(false)
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            notificationManager.createNotificationChannel(notificationChannel)
-//        }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            builder = Notification.Builder(this, channelId)
-//            .setContentTitle("Bird Notification:")
-//            .setContentText("You got mail from your BirdFriend!")
-//            .setContentIntent(pendingIntent)
-//            .setAutoCancel(true)
-//            .setSmallIcon(R.drawable.bird_1)
-//        }
-//
-//        notificationManager.notify(0, builder.build())
-//        sendNewCard = false
-//    }
-
-
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
