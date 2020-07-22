@@ -11,14 +11,12 @@ class AddPostWorker(val appContext: Context, workerParams: WorkerParameters):
     Worker(appContext, workerParams) {
     override fun doWork(): Result {
 
-        // Do the work here--in this case, change show text display
 
         try {
 
             addNewPostCard()
             return Result.success()
             Log.i("testing", "AddPostWorker initiated!")
-            // below is where data is log at request method
 
 
         } catch(e:Exception) {

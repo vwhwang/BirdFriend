@@ -2,7 +2,6 @@ package com.example.birdfriend
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +12,9 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import java.text.SimpleDateFormat
 import java.util.*
 
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class SecondFragment : Fragment() {
 
     lateinit var flyAnimation: AnimationDrawable
@@ -51,7 +46,6 @@ class SecondFragment : Fragment() {
         }
 
 
-//        Log.d("check", MainActivity.mainHomeStatus.toString())
 
         //set up random activity : fly, sleep etc.
         val playImage = view.findViewById<ImageView>(R.id.play).apply {
@@ -69,8 +63,6 @@ class SecondFragment : Fragment() {
             setBackgroundResource(R.drawable.animation)
             flyAnimation = background as AnimationDrawable
         }
-//        flyAnimation.start()
-//            flyImage.setOnClickListener({ flyAnimation.start() })
 
         val bagImage = view.findViewById<ImageView>(R.id.bag)
 
@@ -107,7 +99,7 @@ class SecondFragment : Fragment() {
         }
 
 
-// HOME OR NOT CALL FROM LOG STATE
+        // HOME OR NOT CALL FROM LOG STATE
         val context = activity?.applicationContext
         if (context != null) {
             val dbLogState = LogStateDatabase.getDatabase(context)
@@ -142,10 +134,6 @@ class SecondFragment : Fragment() {
                     setBirdPosition(view,MainActivity.setBird)
                 }
 
-                // show one position of animation
-
-//                flyAnimation.start()
-//                sleepAnimation.start()
             }
         }
 
@@ -202,41 +190,3 @@ class SecondFragment : Fragment() {
 
 
 
-
-//Logging lifecycle
-/**
-///LEARNING
-override fun onCreate(savedInstanceState: Bundle?) {
-super.onCreate(savedInstanceState)
-Log.i("TitleFragment", "onCreate called")
-}
-override fun onActivityCreated(savedInstanceState: Bundle?) {
-super.onActivityCreated(savedInstanceState)
-Log.i("TitleFragment", "onActivityCreated called")
-}
-override fun onStart() {
-super.onStart()
-Log.i("TitleFragment", "onStart called")
-}
-override fun onResume() {
-super.onResume()
-Log.i("TitleFragment", "onResume called")
-}
-override fun onPause() {
-super.onPause()
-Log.i("TitleFragment", "onPause called")
-}
-override fun onStop() {
-super.onStop()
-Log.i("TitleFragment", "onStop called")
-}
-
-override fun onDestroyView() {
-super.onDestroyView()
-Log.i("TitleFragment", "onDestroyView called")
-}
-override fun onDetach() {
-super.onDetach()
-Log.i("TitleFragment", "onDetach called")
-}
- */

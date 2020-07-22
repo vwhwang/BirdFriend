@@ -4,32 +4,25 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.content.pm.LauncherActivityInfo
-import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_postcards.*
 import java.util.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class FirstFragment : Fragment() {
 
     // added for notification
@@ -58,7 +51,7 @@ class FirstFragment : Fragment() {
         showText.animateText("Hi bird friend!")
 
         view.findViewById<Button>(R.id.door_button).setOnClickListener {
-//            Log.d("notify", "this for sure works")
+
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
@@ -101,7 +94,7 @@ class FirstFragment : Fragment() {
             view.setBackgroundResource(R.drawable.trash_night)
         }
 
-        // bounce animation
+        // letter bounce animation
         val bounceAnimation = AnimationUtils.loadAnimation(activity?.applicationContext,R.anim.bounce_animation)
         val letterView = view.findViewById<ImageView>(R.id.letter_img)
         val db = activity?.applicationContext?.let { UserCardsRoomDatabase.getDatabase(it) }
@@ -172,30 +165,3 @@ class FirstFragment : Fragment() {
 
 
 
-
-
-// NOTIFICATION WITHIN CLICK
-/*
-
-
-        view.findViewById<Button>(R.id.temp_notify_button).setOnClickListener{
-
-            notificationManager = this.activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            val intent = Intent(activity, LauncherActivityInfo::class.java)
-            val pendingIntent = PendingIntent.getActivity(activity,0,intent, 0)
-            notificationChannel = NotificationChannel(channelId, description,NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
-
-            builder = Notification.Builder(activity, channelId)
-                .setContentTitle("Bird Notification:")
-                .setContentText("You got mail from your BirdFriend!")
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.bird_1)
-
-            notificationManager.notify(0, builder.build())
-        }
- */

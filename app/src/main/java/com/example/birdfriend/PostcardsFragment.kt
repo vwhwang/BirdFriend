@@ -1,8 +1,8 @@
 package com.example.birdfriend
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,11 +13,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_postcards.*
-import android.content.Intent as Intent
 
-/**
- * A simple [Fragment] subclass.
- */
 
 class PostcardsFragment : Fragment() {
     override fun onCreateView(
@@ -37,13 +33,13 @@ class PostcardsFragment : Fragment() {
         }
         val cardList = view.findViewById<LinearLayout>(R.id.cards_display)
 
-// Build data
+        // Build data
 
         val context = activity?.applicationContext
 
         if (context != null) {
             val db = UserCardsRoomDatabase.getDatabase(context)
-//Button to delete all
+        //Button to delete all
 
             view.findViewById<Button>(R.id.delete_all_button).setOnClickListener{
                 // build alert dialog
@@ -75,20 +71,6 @@ class PostcardsFragment : Fragment() {
 
 
 
-//            view.findViewById<Button>(R.id.delete_all_button).setOnClickListener{
-//                db.userCardsDao().deleteAll()
-//                Log.d("PostCardFragment", "all cards deleted!")
-//                findNavController().navigate(R.id.action_PostcardsFragment_to_SecondFragment)
-//                Toast.makeText(activity,"Deleted All Post Cards", Toast.LENGTH_LONG).show()
-//            }
-
-
-            //CODES TO MANUALLY UPDATE DATA FOR TESTING
-//            db.userCardsDao().insertCards(UserCards("post_2",true))
-//            db.userCardsDao().updateCard("lao_post",false)
-//            db.userCardsDao().updateCard("post_1",false)
-//            db.userCardsDao().insertCards(UserCards("post_4",false))
-
             val userCardList = db.userCardsDao().getShowCards()
 
             for (card in userCardList) {
@@ -116,9 +98,6 @@ class PostcardsFragment : Fragment() {
                     var imageView = view.findViewById<ImageView>(R.id.imageView)
                     imageView.setImageResource(resourceID)
 
-//                    imageView.setOnClickListener{
-//                        window.dismiss()
-//                    }
 
                     val dismissButton = view.findViewById<Button>(R.id.dismiss_button)
                     dismissButton.setOnClickListener{
@@ -141,14 +120,6 @@ class PostcardsFragment : Fragment() {
                         startActivity(shareIntent)
 
 
-//                        val sendIntent: Intent = Intent().apply {
-//                            action = Intent.ACTION_SEND
-//                            putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-//                            type = "text/plain"
-//                        }
-//
-//                        val shareIntent = Intent.createChooser(sendIntent, null)
-//                        startActivity(shareIntent)
                     }
 
                     window.showAsDropDown(textView)

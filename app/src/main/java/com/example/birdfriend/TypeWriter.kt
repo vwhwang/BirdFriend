@@ -3,7 +3,6 @@ package com.example.birdfriend
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
-import android.widget.TextView
 
 
 class TypeWriter : androidx.appcompat.widget.AppCompatTextView {

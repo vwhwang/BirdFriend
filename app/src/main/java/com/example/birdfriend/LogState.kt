@@ -1,9 +1,8 @@
 package com.example.birdfriend
 
-import androidx.room.Entity
 import androidx.room.ColumnInfo
+import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 
 
 @Entity(tableName = "log_state_table")

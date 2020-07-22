@@ -1,6 +1,8 @@
 package com.example.birdfriend
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 
 @Dao
 interface LogStateDao {
