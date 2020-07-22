@@ -52,6 +52,11 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val showText = view.findViewById<TypeWriter>(R.id.tv)
+        showText.setText("")
+        showText.setCharacterDelay(150)
+        showText.animateText("Hi bird friend!")
+
         view.findViewById<Button>(R.id.door_button).setOnClickListener {
 //            Log.d("notify", "this for sure works")
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
