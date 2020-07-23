@@ -130,6 +130,8 @@ Add following to AnroidManifest.xml
 
 ## App Features 
 ![Home Page](documentation/street.png)
+![Notify](documentation/screen/notify.png)
+![Mail](documentation/screen/mail.png)
 
 - Notifications of post cards from bird
 - Put a bird on it (user's own photo)
