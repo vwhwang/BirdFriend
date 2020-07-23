@@ -5,32 +5,29 @@
 
 > Tech Stack: Kotlin and Android SDK
 
-![Demo](documentation/result.gif)
+<!-- ![Demo](documentation/result.gif) -->
 
+## Table of Contents
+- [Kotlin Tech Highlights](#kotlin-tech-highlights )
+- [App Features](#app-features)
+- [FAQ](#faq)
 
 
 ## Kotlin Tech Highlights 
 
 - [WorkManager](#workmanager)
-- [Room](#room)
+- [Room Database](#room-database)
 - [NotificationCompat](#notificationcompat)
 - [Intent](#intent)
 - [AnimationDrawable](#animationdrawable)
-- [Bitmap and Canvas](#bitmap)
+- [Bitmap and Canvas](#bitmap-and-canvas)
 - [Permission](#permission)
 
-
-
-
-
-
-
-
-
-
-
 ## WorkManager
-## Room
+> WorkManger was used to queue for work requests on logging bird's latest status of home or away. And if away it will also queue for adding a new post card to trigger notification for users. 
+
+![Work Graph](documentation/work.png)
+## Room Database
 > Room database stored user_cards_table and log_state_table (local storage)
 
 ![Data Table](documentation/table.png)
@@ -48,7 +45,7 @@
 ## AnimationDrawable
 > AnimationDrawable was used to create frame-by-frame animations of bird. 
 
-## Bitmap
+## Bitmap and Canvas
 
 ## Permission
 
@@ -61,6 +58,21 @@ Add following to AnroidManifest.xml
 ```
 ---
 
+
+## App Features 
+
+- Notifications of post cards from bird
+- Put a bird on it (user's own photo)
+- Share post card and photo to instagram or other apps 
+
+#### Put a bird on it
+<!-- ![Put a bird on it](documentation/put.gif) -->
+
+#### Post Cards
+<!-- ![Post Cards](documentation/post_card.gif) -->
+
+---
+
 ## FAQ
 
 - **Why did I code BirdFriend?**
@@ -71,19 +83,3 @@ Add following to AnroidManifest.xml
 
 - **What you learned?**
     - Kotlin! And it is very fun to create an App 
-
----
-
-## App Features 
-
-- Notifications of post cards from bird
-- Put a bird on it (user's own photo)
-- Share post card and photo to instagram or other apps 
-
-  ###### Post Cards
-![Post Cards](documentation/post_card.gif)
-
----
-
-  ###### Put a bird on it
-![Put a bird on it](documentation/put.gif)
