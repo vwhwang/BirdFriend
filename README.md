@@ -7,6 +7,13 @@
 
 <!-- ![Demo](documentation/result.gif) -->
 
+## App Features 
+
+- Notifications of post cards from bird
+- Put a bird on it (user's own photo)
+- Share post card and photo to instagram or other apps 
+
+
 ## Kotlin Tech Highlights 
 
 - [WorkManager](#workmanager)
@@ -16,6 +23,7 @@
 - [AnimationDrawable](#animationdrawable)
 - [Bitmap and Canvas](#bitmap)
 - [Permission](#permission)
+
 
 
 
@@ -65,3 +73,6 @@ Add following to AnroidManifest.xml
 
 - **What is the hardest part of this project for me?**
     - Setting up bird's home or away status from backend. I used the WorkManager to queue for work request on logging bird's latest new status of away or home (see [WorkManager](#workmanager))
+
+- **What you learned?**
+    - Kotlin! And it is very fun to create an App 
