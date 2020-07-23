@@ -7,15 +7,7 @@
 
 ![Demo](documentation/result.gif)
 
-## App Features 
 
-- Notifications of post cards from bird
-- Put a bird on it (user's own photo)
-- Share post card and photo to instagram or other apps 
-Put a bird on it:
-![Put a bird on it](documentation/put.gif) 
-Post Cards:
-![Post Cards](documentation/post_card.gif)
 
 ## Kotlin Tech Highlights 
 
@@ -79,3 +71,19 @@ Add following to AnroidManifest.xml
 
 - **What you learned?**
     - Kotlin! And it is very fun to create an App 
+
+---
+
+## App Features 
+
+- Notifications of post cards from bird
+- Put a bird on it (user's own photo)
+- Share post card and photo to instagram or other apps 
+
+  ###### Post Cards
+![Post Cards](documentation/post_card.gif)
+
+---
+
+  ###### Put a bird on it
+![Put a bird on it](documentation/put.gif)
