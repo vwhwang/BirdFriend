@@ -5,7 +5,7 @@
 
 > Tech Stack: Kotlin and Android SDK
 
-<!-- ![Demo](documentation/result.gif) -->
+![Demo](documentation/result.gif)
 
 ## Table of Contents
 - [Kotlin Tech Highlights](#kotlin-tech-highlights )
@@ -24,21 +24,53 @@
 - [Permission](#permission)
 
 ## WorkManager
-> WorkManger was used to queue for work requests on logging bird's latest status of home or away. And if away it will also queue for adding a new post card to trigger notification for users. 
+> WorkManger was used to schedule tasks on logging bird's latest status of home or away to log_state_table. And if away it will also queue for adding a new post card to trigger notification for users by changing image status to TRUE. 
 
 ![Work Graph](documentation/work.png)
+
+Dependencies added for Work to build.gradle
+```shell
+    def work_version = "2.3.4"
+
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+```
 ## Room Database
-> Room database stored user_cards_table and log_state_table (local storage)
+> Room database was used to create user_cards_table and log_state_table (for local storage). 3 main components of room: Entity, Dao and Database. 
 
 ![Data Table](documentation/table.png)
 
-- Entity
-- Dao
-- Database
+Dependencies added for Room to build.gradle
+```shell
+def room_version = "2.2.5"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+```
 
 ## NotificationCompat
 > NotificationCompat APIs was used to set up notification for new post cards in mail box. 
 
+Dependencies added for Work to build.gradle
+```shell
+    //noinspection GradleCompatible
+    implementation "com.android.support:support-compat:28.0.0"
+```
 ## Intent 
 > Intent was used to share data to external of App
 
@@ -66,10 +98,10 @@ Add following to AnroidManifest.xml
 - Share post card and photo to instagram or other apps 
 
 #### Put a bird on it
-<!-- ![Put a bird on it](documentation/put.gif) -->
+![Put a bird on it](documentation/put.gif)
 
 #### Post Cards
-<!-- ![Post Cards](documentation/post_card.gif) -->
+![Post Cards](documentation/post_card.gif)
 
 ---
 
