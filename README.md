@@ -7,11 +7,15 @@
 
 <!-- ![Demo](documentation/result.gif) -->
 
-## Kotlin Tech Used 
+## Kotlin Tech Highlights 
 
 - [WorkManager](#workmanager)
 - [Room](#room)
 - [NotificationCompat](#notificationcompat)
+- [Intent](#intent)
+- [AnimationDrawable](#animationdrawable)
+- [Bitmap and Canvas](#bitmap)
+- [Permission](#permission)
 
 
 
@@ -35,3 +39,29 @@
 ## NotificationCompat
 > NotificationCompat APIs was used to set up notification for new post cards in mail box. 
 
+## Intent 
+> Intent was used to share data to external of App
+
+## AnimationDrawable
+> AnimationDrawable was used to create frame-by-frame animations of bird. 
+
+## Bitmap
+
+## Permission
+
+> Manifest.permission was used to access exteranl photo of user's for bird and user image process. 
+
+Add following to AnroidManifest.xml
+```shell
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+```
+---
+
+## FAQ
+
+- **Why did I code BirdFriend?**
+    - BirdFriend is a Capstone project I worked on during Ada Developers Academy Cohort 13! (3 weeks project July 2020)
+
+- **What is the hardest part of this project for me?**
+    - Setting up bird's home or away status from backend. I used the WorkManager to queue for work request on logging bird's latest new status of away or home (see [WorkManager](#workmanager))
