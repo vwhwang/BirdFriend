@@ -5,7 +5,7 @@
 
 > Tech Stack: Kotlin and Android SDK
 
-<!-- ![Demo](documentation/result.gif) -->
+![Demo](documentation/result.gif)
 
 ## Table of Contents
 - [Kotlin Tech Highlights](#kotlin-tech-highlights )
@@ -135,10 +135,10 @@ Add following to AnroidManifest.xml
 - Share post card and photo to instagram or other apps 
 
 #### Put a bird on it
-<!-- ![Put a bird on it](documentation/put.gif) -->
+![Put a bird on it](documentation/put.gif)
 
 #### Post Cards
-<!-- ![Post Cards](documentation/post_card.gif) -->
+![Post Cards](documentation/post_card.gif)
 
 ---
 
