@@ -130,6 +130,7 @@ Add following to AnroidManifest.xml
 
 ## App Features 
 ![Home Page](documentation/street.png)
+
 - Notifications of post cards from bird
 - Put a bird on it (user's own photo)
 - Share post card and photo to instagram or other apps 
