@@ -129,8 +129,10 @@ Add following to AnroidManifest.xml
 
 
 ## App Features 
-![Home Page](documentation/street.png) | <ul><li>Home Page</li><li>Click on door for bird's house</li><li>Click on letter for new post card from bird</li></ul>| 
---- | --- | 
+![Home Page](documentation/street.png) | <ul><li>Home Page</li><li>Click on door for bird's house</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| 
+--- | :--- | 
+
+
 
 
 
