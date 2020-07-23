@@ -3,6 +3,35 @@
 
 > Bird is either home or away, while bird is away, he will send users post cards (notifications) about his adventures.
 
-> Tech Stack: Kotlin
+> Tech Stack: Kotlin and Android SDK
 
-![Demo](result.gif)
+<!-- ![Demo](documentation/result.gif) -->
+
+## Kotlin Tech Used 
+
+- [WorkManager](#workmanager)
+- [Room](#room)
+- [NotificationCompat](#notificationcompat)
+
+
+
+
+
+
+
+
+
+
+## WorkManager
+## Room
+> Room database stored user_cards_table and log_state_table (local storage)
+
+![Data Table](documentation/table.png)
+
+- Entity
+- Dao
+- Database
+
+## NotificationCompat
+> NotificationCompat APIs was used to set up notification for new post cards in mail box. 
+
