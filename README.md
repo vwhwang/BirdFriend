@@ -134,11 +134,7 @@ Add following to AnroidManifest.xml
 ![House Page](documentation/screen/house.png)| <ul><li>Inside House Page</li><li>Click on red luggage to pack for bird and set for home or away [work manager](#workmanager)</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| test|
 ![Away](documentation/screen/away.png) | <ul><li>test<li></ul>|test|
 ![Bird On It](documentation/screen/art.jpg)| ![Bird On It](documentation/screen/withbird.jpg)|<ul><li>test<li></ul>|
-
-
-
-![Notify](documentation/screen/notify.png)
-![Mail](documentation/screen/mail.png)
+![Notify](documentation/screen/notify.png)|![Mail](documentation/screen/mail.png)|test|
 
 - Notifications of post cards from bird
 - Put a bird on it (user's own photo)
