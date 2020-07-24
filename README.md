@@ -131,10 +131,8 @@ Add following to AnroidManifest.xml
 ## App Features 
 ![Home Page](documentation/street.png) | <ul><li>Home Page</li><li>Click on door for bird's house</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| 
 --- | :--- | 
-
-![House Page](documentation/screen/house.png)![House Page](documentation/screen/away.png) | <ul><li>Inside House Page</li><li>Click on red luggage to pack for bird and set for home or away [work manager](#workmanager)</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| 
---- | :--- | 
-
+![House Page](documentation/screen/house.png)| <ul><li>Inside House Page</li><li>Click on red luggage to pack for bird and set for home or away [work manager](#workmanager)</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| 
+![House Page](documentation/screen/away.png) | <ul><li>test<li></ul>
 
 
 
