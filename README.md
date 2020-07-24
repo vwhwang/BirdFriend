@@ -200,4 +200,4 @@ App View | Actions|
     - Kotlin! And it is very fun to create an App 
 
 ## Trello Link
-- [BirdFriend trello link]([https://https://trello.com/b/qEODDrtR/birdfriend](https://trello.com/b/qEODDrtR/birdfriend))
+- [BirdFriend trello link](https://trello.com/b/qEODDrtR/birdfriend)
