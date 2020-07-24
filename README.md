@@ -7,19 +7,19 @@
 
 ## Main ⭐️⭐️⭐️ Features
 
-    ⭐️Notifications of post cards from bird
-    ⭐️Put a bird on it (user's own photo)
-    ⭐️Share post card and photo to instagram or other apps
+    ⭐️ Notifications of post cards from bird
+    ⭐️ Put a bird on it (user's own photo)
+    ⭐️ Share post card and photo to instagram or other apps
 
 ![Demo](documentation/result.gif)
 
 ## Table of Contents
-- [Kotlin Tech Highlights](#kotlin-tech-highlights )
+- [Kotlin and Android SDK ](#kotlin-and-android-sdk)
 - [App Features](#app-features)
 - [FAQ](#faq)
 
 
-## Kotlin Tech Highlights 
+## Kotlin and Android SDK 
 
 - [WorkManager](#workmanager)
 - [Room Database](#room-database)
@@ -91,7 +91,7 @@ Dependencies added for Work to build.gradle
 
 
 ## Intent 
-> Intent was used to share post cards to other apps (Instagram, messages etc.)
+> Intent was used to share post cards to other apps (Instagram, messages etc.) It was also used to access user's photo
 
 Example code
 ```shell
@@ -146,8 +146,9 @@ Add following to AnroidManifest.xml
 
 ### Overview 
 
-![Home Page](documentation/street.png) | <ul><li>Home Page</li><li>Click on door to enter bird's house</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| 
+App View | Actions|
 --- | :--- | 
+![Home Page](documentation/street.png) | <ul><li>Home Page</li><li>Click on door to enter bird's house</li><li>Click on letter for new post card from bird [Notifications](#notificationcompat)</li></ul>| 
 ![House Page](documentation/screen/house.png)| <ul><li>Inside House Page</li><li>Click on red luggage to pack for bird and set for home or away [WorkManager](#workmanager)</li><li>Click on letter for new post card from bird [Notifications](#notification-of-post-cards)</li></ul>| 
 ![Away](documentation/screen/away.png) | <ul><li>Home or Away is determined by [WorkManager's](#workmanager) latest logged status</li><li>When Away, workmanager will schedule task of adding new post card to database which will send new notification</li></ul>|
 
