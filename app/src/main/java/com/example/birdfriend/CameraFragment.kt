@@ -176,8 +176,8 @@ class CameraFragment : Fragment() {
             val userWidth = youAndBird.width
             val userHeight = youAndBird.height
 
-            canvas.drawBitmap(bMapScaled, userWidth - 1500f, userHeight - 3000f, null)
-
+//            canvas.drawBitmap(bMapScaled, userWidth - 1500f, userHeight - 3000f, null)
+            canvas.drawBitmap(bMapScaled, 0.25f * userWidth, 0.5f * userHeight , null)
             // Attach the canvas to the ImageView
             loadimage?.setImageDrawable(BitmapDrawable(resources, youAndBird))
         }
